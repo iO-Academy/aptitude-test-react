@@ -5,7 +5,7 @@ import { ProvideAuth } from './Hooks/useAuth';
 import LoginButton from './Components/Atoms/LoginButton/LoginButton';
 import Routes from './Routes/Routes';
 
-const App: React.FC = () => {
+const App = () => {
     return (
         <ProvideAuth>
             <Router>
@@ -13,10 +13,13 @@ const App: React.FC = () => {
                     <nav>
                         <ul>
                             <li>
-                                <Link to="/">Home</Link>
+                                <Link to="/">Login</Link>
                             </li>
                             <li>
                                 <Link to="/admin">Admin</Link>
+                            </li>
+                            <li>
+                                <Link to="/exam">Take the test</Link>
                             </li>
                         </ul>
                     </nav>

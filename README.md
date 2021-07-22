@@ -39,7 +39,7 @@ If you have created a functional component use `React.FC`
 
 ### Routing with React-Router-dom
 
-The route declarations are made in `src/Routes/Routes.tsx`. See the [documentation](https://reactrouter.com/web/guides/quick-start) for more information on how to manage routes.
+The route declarations are made in `src/Routes/Routes.js`. See the [documentation](https://reactrouter.com/web/guides/quick-start) for more information on how to manage routes.
 
 Surround any page route you require to be protected with `<PrivateRoute></PrivateRoute>` eg:
 ```
@@ -47,3 +47,7 @@ Surround any page route you require to be protected with `<PrivateRoute></Privat
   <Admin />
 </PrivateRoute>
 ```
+
+### Environment Variables
+
+These live in `.env` - They must begin with `REACT_APP` 
