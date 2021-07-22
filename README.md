@@ -41,11 +41,18 @@ If you have created a functional component use `React.FC`
 
 The route declarations are made in `src/Routes/Routes.js`. See the [documentation](https://reactrouter.com/web/guides/quick-start) for more information on how to manage routes.
 
-Surround any page route you require to be protected with `<PrivateRoute></PrivateRoute>` eg:
+Surround any page route specifically for applicants with `<PrivateRoute></PrivateRoute>` eg:
 ```
-<PrivateRoute path="/admin">
-  <Admin />
+<PrivateRoute path="/exam">
+  <Exam />
 </PrivateRoute>
+```
+
+Surround any page route specifically for admin with `<AdminRoute></AdminRoute>` eg:
+```
+<AdminRoute path="/admin">
+  <Admin />
+</AdminRoute>
 ```
 
 ### Environment Variables
