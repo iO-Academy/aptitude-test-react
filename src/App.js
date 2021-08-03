@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { ProvideAuth } from './Hooks/useAuth';
 import Routes from './Routes/Routes';
 
