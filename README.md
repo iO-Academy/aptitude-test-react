@@ -62,6 +62,7 @@ There are some custom built hooks/functions that provide functionality that may 
 when developing features. They live in `src/Hooks`.
 
 `useAuth` - Provides neat API to find out who, if anyone, is currently logged in. Also provides methods to login/logout.
+
 `useFetch` - Use this to make API calls - it will always use the correct base URL when local/live.
 
 ### Front end styling
