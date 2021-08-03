@@ -8,6 +8,7 @@ const LoginButton = () => {
         <>
             {auth.user === null ? (
                 <>
+                    <h4>Please enter your email address</h4>
                     <input type="text" value={email} onInput={(e) => setEmail(e.target.value)} />
                     <button onClick={() => auth.signin(email)}>Login</button>
                 </>
