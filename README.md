@@ -1,6 +1,10 @@
 # Aptitude Test
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) using the typescript template. 
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). There are some 
+great additional docs [here](https://create-react-app.dev/) too
+
+This application requires [this API](https://github.com/iO-Academy/aptitude-test/tree/master/api) to be up and running 
+to work correctly. When working locally be sure it is working and able to recieve requests.  
 
 ## Available Scripts
 
@@ -14,11 +18,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\
@@ -31,11 +30,9 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ### Setting up Eslint & Prettier in PHP Storm
 
-Open the PHPStorm Preferences, go to Languages and Frameworks | JavaScript | Code Quality Tools | ESLint, and select the Automatic ESLint configuration option. Tick the box ```run eslint --fix on save``` and click OK. This will standardise your code styles automatically when you save. 
-
-### Useful typescript return types
-
-If you have created a functional component use `React.FC`
+Open the PHPStorm Preferences, go to Languages and Frameworks | JavaScript | Code Quality Tools | ESLint, and select the
+Automatic ESLint configuration option. Tick the box ```run eslint --fix on save``` and click OK. This will standardise 
+your code styles automatically when you save. 
 
 ### Routing with React-Router-dom
 
@@ -57,4 +54,17 @@ Surround any page route specifically for admin with `<AdminRoute></AdminRoute>` 
 
 ### Environment Variables
 
-These live in `.env` - They must begin with `REACT_APP` 
+These live in `.env` - They must begin with `REACT_APP`
+
+### Useful hooks/functions 
+
+There are some custom built hooks/functions that provide functionality that may remove the need to 'reinvent the wheel' 
+when developing features. They live in `src/Hooks`.
+
+`useAuth` - Provides neat API to find out who, if anyone, is currently logged in. Also provides methods to login/logout.
+`useFetch` - Use this to make API calls - it will always use the correct base URL when local/live.
+
+### Front end styling
+
+The application contains SCSS - just use `.scss` files where you would usually use `.css`. The `create-react-app` 
+compliation process will take care of the rest automatically. 

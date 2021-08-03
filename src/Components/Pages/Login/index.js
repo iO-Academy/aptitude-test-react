@@ -1,4 +1,6 @@
 import React from 'react';
+import logo from './iO_Logo_Alt.svg';
+import './styles.scss';
 import { useAuth } from '../../../Hooks/useAuth';
 import { Redirect, Route } from 'react-router-dom';
 import LoginButton from '../../Atoms/LoginButton/LoginButton';
@@ -28,7 +30,8 @@ const Login = () => {
                             }}
                         />
                     ) : (
-                        <>
+                        <main>
+                            <img className="ioLogo" src={logo} />
                             <h3>Welcome to the iO Academy aptitude test</h3>
                             <div>
                                 <p>-WARNING-</p>
@@ -36,7 +39,7 @@ const Login = () => {
                                 <p>If you dont stay on the page, the test will end and your score will be set to 0.</p>
                             </div>
                             <LoginButton />
-                        </>
+                        </main>
                     )
                 }
             />
