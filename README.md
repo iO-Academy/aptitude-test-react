@@ -71,3 +71,71 @@ when developing features. They live in `src/Hooks`.
 
 The application contains SCSS - just use `.scss` files where you would usually use `.css`. The `create-react-app` 
 compliation process will take care of the rest automatically. 
+
+### An example of a performant 'auto updating' front end view
+
+Often you will be making an initial API call to get data then manipulating it through user actions and wanting to see 
+live updates on the page. Hooks provide a good way to do this, however can often be misused and lead to the creation of 
+an infinite loop of re-renders.
+
+The example below demonstrates a pattern that prevents infinite loops of re renders.
+
+```jsx
+import React, { useEffect, useState } from 'react';
+import LoginButton from '../../Atoms/LoginButton/LoginButton';
+import fetchApi from '../../../Hooks/useFetch';
+
+// This component is an example of displaying data from an API and keeping the front end up to date with any changes
+// made to the data at the API in real time without needing to reload the page.
+const Admin = () => {
+    // initial state of all the users is null until it is populated by the API call
+    const [users, setUsers] = useState(null);
+
+    // the use effect hook is passed a 2nd param of [], ensuring it only runs once when the component is first mounted
+    useEffect(async () => {
+        // common error: the code calling the API is often placed directly in here - abstracting it into its own
+        // function (getUsers) is key to this pattern working
+        getUsers();
+    }, []);
+
+    // because it is abstracted here we have control when it occurs - once when component first mounted then whenever
+    // we choose from that point onwards, thus no infinite recalling.
+    const getUsers = async () => {
+        let response = await fetchApi(`user`);
+        if (response.success) {
+            return setUsers(response.data);
+        }
+    };
+
+    // getUsers is called after we have edited the data that is displayed on the page, thus triggering a re-render and
+    // making sure our front end is up to date with any changes made at the database.
+    const editUserExample = async (user) => {
+        // this function just edits the user data at the API so that we are faced with the problem we are trying to
+        // solve - mismatches between the front end data displayed and what is actually saved at the database.
+        user.canRetake = 1;
+        let response = await fetchApi(`user/edit`, {
+            method: 'POST',
+            body: user,
+        });
+        getUsers();
+    };
+
+    return (
+        <>
+            <LoginButton />
+            <p onClick={handleClick}>Admin page</p>
+            {users &&
+                users.map((user) => {
+                    return (
+                        <p key={user.id}>
+                            {user.name}
+                            {user.canRetake === '0' && <button onClick={() => editUserExample(user)}>Click</button>}
+                        </p>
+                    );
+                })}
+        </>
+    );
+};
+
+export default Admin;
+```
