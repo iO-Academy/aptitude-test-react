@@ -1,4 +1,3 @@
-import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Login from '../Components/Pages/Login';
 import Admin from '../Components/Pages/Admin';

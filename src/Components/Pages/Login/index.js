@@ -1,4 +1,3 @@
-import React from 'react';
 import logo from './iO_Logo_Alt.svg';
 import './styles.scss';
 import { useAuth } from '../../../Hooks/useAuth';
