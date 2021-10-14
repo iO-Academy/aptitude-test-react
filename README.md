@@ -3,7 +3,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). There are some 
 great additional docs [here](https://create-react-app.dev/) too
 
-This application requires [this API](https://github.com/iO-Academy/aptitude-test/tree/master/api) to be up and running 
+This application requires [this API](https://github.com/iO-Academy/aptitude-test-api) to be up and running 
 to work correctly. When working locally be sure it is working and able to recieve requests.  
 
 Once cloned run `npm i` in the root of the project to download the dependancies.
