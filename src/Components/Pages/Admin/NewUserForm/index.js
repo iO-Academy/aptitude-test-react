@@ -6,6 +6,7 @@ const NewUserHeading = () => {
 };
 
 const NewUserInput = () => {
+    // Retrieving test types for user input dropdown.
     const [tests, setTests] = useState(null);
     useEffect(async () => {
         await getTests();
@@ -16,6 +17,7 @@ const NewUserInput = () => {
             return setTests(response.data);
         }
     };
+    // Retrieving category types for user input dropdown.
     const [categories, setCategories] = useState(null);
     useEffect(async () => {
         await getCategories();
@@ -37,6 +39,7 @@ const NewUserInput = () => {
             <div>
                 <label htmlFor="tests">Assign to test:</label>
                 <select id="tests" name="tests">
+                    {/*Mapping tests to option values for dropdown*/}
                     {tests &&
                         tests.map((test) => {
                             return (
@@ -50,6 +53,7 @@ const NewUserInput = () => {
             <div>
                 <label htmlFor="categories">Category:</label>
                 <select id="categories" name="categories">
+                    {/*Mapping categories to option values for dropdown*/}
                     {categories &&
                         categories.map((category) => {
                             return (
