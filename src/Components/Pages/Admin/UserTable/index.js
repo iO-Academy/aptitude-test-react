@@ -2,7 +2,7 @@ import Table from 'react-bootstrap/Table';
 
 const UserTable = (props) => {
     return (
-        <Table className="table striped">
+        <Table className="table mx-auto">
             <thead>
                 <tr>
                     <th scope="col">Name</th>
