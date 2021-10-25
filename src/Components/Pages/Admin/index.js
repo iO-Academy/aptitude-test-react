@@ -28,12 +28,12 @@ const Admin = () => {
     return (
         <>
             <LoginButton />
+            <NewUserForm />
             <p>Admin page</p>
             {users &&
                 users.map((user) => {
                     return <p key={user.id}>{user.name}</p>;
                 })}
-            <NewUserForm />
         </>
     );
 };
