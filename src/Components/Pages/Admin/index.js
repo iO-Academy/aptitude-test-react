@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import LoginButton from '../../Atoms/LoginButton/LoginButton';
 import fetchApi from '../../../Hooks/useFetch';
-
+import TableAccordion from '../../Atoms/Accordion';
 // This component is an example of displaying data from an API and keeping the front end up to date with any changes
 // made to the data at the API in real time without needing to reload the page.
 const Admin = () => {
@@ -28,10 +28,26 @@ const Admin = () => {
         <>
             <LoginButton />
             <p>Admin page</p>
-            {users &&
-                users.map((user) => {
-                    return <p key={user.id}>{user.name}</p>;
-                })}
+            <div className={'container'}>
+                <div className={'row'}>
+                    <div className={'col'}>
+                        {users &&
+                            users.map((user) => {
+                                return (
+                                    <div key={user.id}>
+                                        {user.name}
+                                        <TableAccordion
+                                            userCategory={user.category_name}
+                                            testAllocated={user.test_id}
+                                            timeAllowed={user.time}
+                                            timerHidden={user.showTimer}
+                                        />
+                                    </div>
+                                );
+                            })}
+                    </div>
+                </div>
+            </div>
         </>
     );
 };
