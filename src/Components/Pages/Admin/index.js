@@ -24,14 +24,35 @@ const Admin = () => {
         }
     };
 
+    console.log(users);
+
     return (
         <>
             <LoginButton />
             <p>Admin page</p>
-            {users &&
-                users.map((user) => {
-                    return <p key={user.id}>{user.name}</p>;
-                })}
+            {/*{users &&*/}
+            {/*    users.map((user) => {*/}
+            {/*        return <p key={user.id}>{user.name}</p>;*/}
+            {/*    })}*/}
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {users &&
+                        users.map((user) => {
+                            return (
+                                <tr key={user.id}>
+                                    <td scope="row">{user.name}</td>
+                                    <td>{user.email}</td>
+                                </tr>
+                            );
+                        })}
+                </tbody>
+            </table>
         </>
     );
 };
