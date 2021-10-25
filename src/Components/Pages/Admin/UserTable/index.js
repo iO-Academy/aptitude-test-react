@@ -1,16 +1,26 @@
-const UserTable = () => {
-    //Create a table
-    //Create table headers
-    let res
+import Table from 'react-bootstrap/Table';
 
-    //Map: create all rows based on user data
-    {users &&
-    users.map((user) => {
-        return <p key={user.id}>{user.name}</p>;
-    })}
-    return(
+const UserTable = (props) => {
+    return (
+        <Table className="table striped">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {props.users.map((user) => {
+                    return (
+                        <tr key={user.id}>
+                            <td scope="row">{user.name}</td>
+                            <td>{user.email}</td>
+                        </tr>
+                    );
+                })}
+            </tbody>
+        </Table>
+    );
+};
 
-    )
-}
-
-export default UserTable
+export default UserTable;
