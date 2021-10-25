@@ -32,7 +32,7 @@ const Admin = () => {
     return (
         <div className="container">
             <LoginButton />
-            <p>Admin page</p>
+            <h1>Admin page</h1>
             {createTable()}
         </div>
     );
