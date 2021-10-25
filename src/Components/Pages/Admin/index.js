@@ -8,6 +8,8 @@ import UserTable from './UserTable';
 const Admin = () => {
     // initial state of all the users is null until it is populated by the API call
     const [users, setUsers] = useState(null);
+    //initial state of the table is null until users is populated
+    const [table, setTable] = useState(null);
 
     // the use effect hook is passed a 2nd param of [], ensuring it only runs once when the component is first mounted
     useEffect(async () => {
@@ -25,14 +27,14 @@ const Admin = () => {
         }
     };
 
-    const createTable = () => {
-        return users ? <UserTable users={users} /> : '';
-    };
+    useEffect(() => {
+        users ? setTable(<UserTable users={users} />) : '';
+    }, [users]);
 
     return (
         <div className="container">
             <h1>Admin page</h1>
-            {createTable()}
+            {table}
             <LoginButton />
         </div>
     );
