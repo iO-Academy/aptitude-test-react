@@ -31,9 +31,9 @@ const Admin = () => {
 
     return (
         <div className="container">
-            <LoginButton />
             <h1>Admin page</h1>
             {createTable()}
+            <LoginButton />
         </div>
     );
 };
