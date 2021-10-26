@@ -15,11 +15,11 @@ const UserTable = (props) => {
                 {props.users.map((user) => {
                     return (
                         <>
-                            <tr className="border-top">
+                            <tr className="border-top" key={user.id}>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                             </tr>
-                            <tr>
+                            <tr key={user.id + 'a'}>
                                 <td colSpan={3}>
                                     <TableAccordion user={user} />
                                 </td>
