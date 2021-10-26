@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import LoginButton from '../../Atoms/LoginButton/LoginButton';
 import fetchApi from '../../../Hooks/useFetch';
 import TableAccordion from './Accordion';
+import useJoin from '../../../Hooks/useJoin';
 // This component is an example of displaying data from an API and keeping the front end up to date with any changes
 // made to the data at the API in real time without needing to reload the page.
 const Admin = () => {
@@ -39,17 +40,7 @@ const Admin = () => {
     // this code replaces the value in user.testID for each user with the test name from the test with a matching ID
     useEffect(() => {
         if (users && tests) {
-            // maps the users array to a temporary array with the value in user.test_id replaced with the name from the corresponding test
-            let tempUsers = users.map((user) => {
-                // filters the tests array based on if the test id matches the user test id
-                let filteredTest = tests.filter((test) => {
-                    return test.id === user.test_id;
-                });
-                user.test_id = filteredTest[0].name;
-                return user;
-            });
-            // sets the array constructed in tempUsers to the variable newUsers
-            setNewUsers(tempUsers);
+            setNewUsers(useJoin([users, 'test_id'], [tests, 'id', 'name']));
         }
     }, [users, tests]);
 
