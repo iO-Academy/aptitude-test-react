@@ -6,11 +6,19 @@ import NavButton from '../../Atoms/NavButton/NavButton';
 const QuestionView = (props) => {
     return (
         <>
-            <QuestionTracker currentQuestionID={props.currentQuestionID} numberOfQuestions={props.numberOfQuestions} />
+            <QuestionTracker currentQuestionId={props.currentQuestionId} numberOfQuestions={props.numberOfQuestions} />
             <FlagButton />
-            <QuestionMain currentQuestion={props.currentQuestion} changeCurrentID={props.setCurrentQuestionId} />
-            <NavButton action="next" />
-            <NavButton action="previous" />
+            <QuestionMain currentQuestion={props.currentQuestion} changeCurrentId={props.setCurrentQuestionId} />
+            <NavButton
+                action="next"
+                currentQuestionId={props.currentQuestionId}
+                changeCurrentId={props.changeCurrentId}
+            />
+            <NavButton
+                action="previous"
+                currentQuestionId={props.currentQuestionId}
+                changeCurrentId={props.changeCurrentId}
+            />
         </>
     );
 };

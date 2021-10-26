@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import fetchApi from '../../../Hooks/useFetch';
+import QuestionView from '../QuestionView/QuestionView';
 
 const Test = () => {
     const [questions, setQuestions] = useState([]);
@@ -26,9 +27,7 @@ const Test = () => {
     };
     return (
         <>
-            <p>{currentQuestion.text}</p>
-            <p onClick={() => modifyQuestionId(3)}>Hello Hello Testing Testing Quiz Time</p>
-            <p>{currentQuestionId}</p>
+            <QuestionView currentQuestionId={currentQuestionId} changeCurrentId={setCurrentQuestionId} />
         </>
     );
 };
