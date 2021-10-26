@@ -1,8 +1,9 @@
-import { Form } from 'react-bootstrap';
+import { Container, Form } from 'react-bootstrap';
+import './styles.scss';
 
 const QuestionMain = (props) => {
     return (
-        <>
+        <Container className="questionContainer">
             <h3> {props.currentQuestion.text}</h3>
             <Form>
                 <Form.Check
@@ -45,7 +46,7 @@ const QuestionMain = (props) => {
                     name="currentQuestion"
                 />
             </Form>
-        </>
+        </Container>
     );
 };
 
