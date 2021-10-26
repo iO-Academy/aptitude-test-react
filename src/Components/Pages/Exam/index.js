@@ -1,10 +1,10 @@
-import Quiz from '../../Organisms/Quiz/Quiz';
+import Test from '../../Organisms/Test/Test';
 
 const Exam = () => {
     return (
         <>
             <p>Exam page</p>
-            <Quiz />
+            <Test />
         </>
     );
 };
