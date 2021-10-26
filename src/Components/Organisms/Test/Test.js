@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react';
 import fetchApi from '../../../Hooks/useFetch';
+import QuestionView from '../QuestionView/QuestionView';
+import { Container, Placeholder } from 'react-bootstrap';
 
 const Test = () => {
     const [questions, setQuestions] = useState([]);
     const [currentQuestionId, setCurrentQuestionId] = useState(1);
     const [currentQuestion, setCurrentQuestion] = useState([]);
+    const [numberOfQuestions, setNumberOfQuestions] = useState(0);
     useEffect(async () => {
         let data = await fetchApi('/question');
         setQuestions(data.data);
+        setNumberOfQuestions(data.data.length);
     }, []);
     function find(currentQuestionId, setCurrentQuestion) {
         useEffect(async () => {
@@ -18,18 +22,19 @@ const Test = () => {
     }
     find(currentQuestionId, setCurrentQuestion);
     const modifyQuestionId = (targetQuestionId) => {
-        let numberOfQuestions = questions.length;
-
         if (targetQuestionId > 0 && targetQuestionId <= numberOfQuestions) {
             setCurrentQuestionId(targetQuestionId);
         }
     };
     return (
-        <>
-            <p>{currentQuestion.text}</p>
-            <p onClick={() => modifyQuestionId(3)}>Hello Hello Testing Testing Quiz Time</p>
-            <p>{currentQuestionId}</p>
-        </>
+        <Container>
+            <QuestionView
+                currentQuestionId={currentQuestionId}
+                numberOfQuestions={numberOfQuestions}
+                currentQuestion={currentQuestion}
+                modifyQuestionId={modifyQuestionId}
+            />
+        </Container>
     );
 };
 export default Test;
