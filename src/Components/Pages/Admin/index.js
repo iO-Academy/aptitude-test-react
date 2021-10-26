@@ -8,14 +8,14 @@ const Admin = () => {
     // initial state of all the users is null until it is populated by the API call
     const [users, setUsers] = useState(null);
     const [newUsers, setNewUsers] = useState(null);
-
-    Object.filter = (obj, predicate) => Object.fromEntries(Object.entries(obj).filter(predicate));
+    const [tests, setTests] = useState(null);
 
     // the use effect hook is passed a 2nd param of [], ensuring it only runs once when the component is first mounted
     useEffect(async () => {
         // common error: the code calling the API is often placed directly in here - abstracting it into its own
         // function (getUsers) is key to this pattern working
         await getUsers();
+        await getTest();
         setNewUsers(users);
     }, []);
 
@@ -28,43 +28,36 @@ const Admin = () => {
         }
     };
 
-    const [tests, setTests] = useState(null);
-
-    useEffect(async () => {
-        await getTest();
-    }, []);
+    // because it is abstracted here we have control when it occurs - once when component first mounted then whenever
+    // we choose from that point onwards, thus no infinite recalling.
     const getTest = async () => {
         let response = await fetchApi(`test`);
         if (response.success) {
             return setTests(response.data);
         }
     };
+    // this code replaces the value in user.testID for each user with the test name from the test with a matching ID
     useEffect(() => {
         if (users && tests) {
-            let tempUsers = [];
-            users.forEach((user) => {
-                let newUserObj = {};
-                let userArray = Object.entries(user);
-                userArray.forEach((value) => {
-                    if (value[0] === 'test_id') {
-                        tests.forEach((test) => {
-                            if (value[1] === test.id) {
-                                newUserObj.test_id = test.name;
-                            }
-                        });
-                    } else {
-                        newUserObj[value[0]] = value[1];
-                    }
+            // maps the users array to a temporary array with the value in user.test_id replaced with the name from the corresponding test
+            let tempUsers = users.map((user) => {
+                // filters the tests array based on if the test id matches the user test id
+                let filteredTest = tests.filter((test) => {
+                    return test.id === user.test_id;
                 });
-                tempUsers.push(newUserObj);
+                user.test_id = filteredTest[0].name;
+                return user;
             });
+            // sets the array constructed in tempUsers to the variable newUsers
             setNewUsers(tempUsers);
         }
     }, [users, tests]);
 
+    // replaces the binary value of showTimer with yes/no and converts the value of time to minutes
     useEffect(() => {
         if (users) {
-            let tempUsers = users.map((user) => {
+            // Timer Hidden
+            let tempUsers1 = users.map((user) => {
                 if (user.showTimer === '1') {
                     user.showTimer = 'yes';
                 } else {
@@ -72,18 +65,13 @@ const Admin = () => {
                 }
                 return user;
             });
-            setNewUsers(tempUsers);
-        }
-    }, [users]);
-
-    useEffect(() => {
-        if (users) {
-            let tempUsers = users.map((user) => {
+            // Timer Allowed
+            let tempUsers2 = tempUsers1.map((user) => {
                 let timeMinutes = parseInt(user.time) / 60;
                 user.time = timeMinutes.toString() + 'm';
                 return user;
             });
-            setNewUsers(tempUsers);
+            setNewUsers(tempUsers2);
         }
     }, [users]);
 
