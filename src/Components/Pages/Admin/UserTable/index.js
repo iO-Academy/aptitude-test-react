@@ -1,21 +1,22 @@
 import Table from 'react-bootstrap/Table';
 import TableAccordion from '../Accordion';
+import './style.css';
 
 const UserTable = (props) => {
     console.log(props.users);
     return (
-        <Table className="table mx-auto">
-            <thead>
-                <tr>
+        <Table className="table-light table-borderless mx-auto">
+            <thead className="tableHead">
+                <tr className="border-3 border-top-0 border-end-0 border-start-0">
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody className="tableBody">
                 {props.users.map((user) => {
                     return (
                         <>
-                            <tr>
+                            <tr className="border-top">
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                             </tr>
