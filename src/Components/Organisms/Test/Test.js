@@ -8,11 +8,18 @@ const Test = () => {
         let data = await fetchApi('/question');
         setQuestions(data.data);
     }, []);
+    const modifyQuestionId = (targetQuestionId) => {
+        let numberOfQuestions = questions.length;
+
+        if (targetQuestionId > 0 && targetQuestionId <= numberOfQuestions) {
+            setCurrentQuestionId(targetQuestionId);
+        }
+    };
     return (
         <>
-            <p>Hello Hello Testing Testing Quiz Time</p>
+            <p onClick={() => modifyQuestionId(25)}>Hello Hello Testing Testing Quiz Time</p>
+            <p>{currentQuestionId}</p>
         </>
     );
 };
-
 export default Test;
