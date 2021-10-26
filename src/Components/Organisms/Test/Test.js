@@ -8,7 +8,6 @@ const Test = () => {
         let results = await data.json();
         setQuestions(results);
     }, []);
-    console.log(questions);
     return (
         <>
             <p>Hello Hello Testing Testing Quiz Time</p>
