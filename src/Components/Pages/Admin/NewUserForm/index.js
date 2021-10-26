@@ -34,6 +34,13 @@ const NewUserInput = () => {
     const [value, setValue] = useState('default');
 
     /**
+     * Calculates total seconds
+     */
+    const timeInSeconds = (minutes, seconds) => {
+        return minutes * 60 + seconds;
+    };
+
+    /**
      * Handles changes to form components
      */
     const formChangeHandler = (event) => {
