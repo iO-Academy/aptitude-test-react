@@ -1,10 +1,5 @@
 import Table from 'react-bootstrap/Table';
-<<<<<<< HEAD
 import TableAccordion from '../Accordion';
-
-const UserTable = (props) => {
-    console.log(props.users);
-=======
 import { useEffect, useState } from 'react';
 import fetchApi from '../../../../Hooks/useFetch';
 
@@ -37,7 +32,6 @@ const UserTable = (props) => {
         }
     };
 
->>>>>>> 45a2c7f8b67cd08e92a5a7a6edb67ee4d715ba2a
     return (
         <Table className="table mx-auto">
             <thead>
@@ -50,11 +44,11 @@ const UserTable = (props) => {
             <tbody>
                 {props.users.map((user) => {
                     return (
-<<<<<<< HEAD
                         <>
                             <tr>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
+                                <td>{calcPercentage(user.id)}</td>
                             </tr>
                             <tr>
                                 <td colSpan={3}>
@@ -62,13 +56,6 @@ const UserTable = (props) => {
                                 </td>
                             </tr>
                         </>
-=======
-                        <tr key={user.id}>
-                            <td scope="row">{user.name}</td>
-                            <td>{user.email}</td>
-                            <td>{calcPercentage(user.id)}</td>
-                        </tr>
->>>>>>> 45a2c7f8b67cd08e92a5a7a6edb67ee4d715ba2a
                     );
                 })}
             </tbody>

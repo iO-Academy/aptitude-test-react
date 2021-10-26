@@ -16,6 +16,7 @@ const TableAccordion = (props) => {
                                 <th>test allocated</th>
                                 <th>time allowed</th>
                                 <th>timer hidden</th>
+                                <th>Score</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -24,6 +25,7 @@ const TableAccordion = (props) => {
                                 <td>{props.user.test_id}</td>
                                 <td>{props.user.time}</td>
                                 <td>{props.user.showTimer}</td>
+                                <td>{props.user.score}</td>
                             </tr>
                         </tbody>
                     </Table>
