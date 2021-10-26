@@ -6,7 +6,7 @@ import Test from './Components/Organisms/Test/Test';
 
 ReactDOM.render(
     <React.StrictMode>
-        <Test />
+        <App />
     </React.StrictMode>,
     document.getElementById('root'),
 );
