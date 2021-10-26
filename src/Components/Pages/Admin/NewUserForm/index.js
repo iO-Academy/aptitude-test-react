@@ -6,26 +6,6 @@ const NewUserHeading = () => {
     return <h2>Add new user</h2>;
 };
 
-const addUser = async (user) => {
-    let response = await fetchApi(`user`, {
-        method: 'POST',
-        header: { 'Content-Type': 'application/json' },
-        body: user,
-    });
-};
-
-const addUserHandler = (event) => {
-    const user = {
-        email: 'example@email.com',
-        name: 'Henri Smith',
-        time: '1800',
-        test_id: '1',
-        category_id: '1',
-    };
-    event.preventDefault();
-    addUser(user);
-};
-
 const NewUserInput = () => {
     // Retrieving test types for user input dropdown.
     const [tests, setTests] = useState(null);
@@ -49,22 +29,64 @@ const NewUserInput = () => {
             return setCategories(response.data);
         }
     };
+
+    const [user, setUser] = useState([]);
+    const [value, setValue] = useState('default');
+
+    const timeInSeconds = (minutes, seconds) => {
+        console.log(minutes, seconds);
+        return minutes * 60 + seconds;
+    };
+
+    const formChangeHandler = (event) => {
+        setUser((user) => ({
+            ...user,
+            [event.target.name]: event.target.value,
+        }));
+
+        setValue(event.target.value);
+    };
+
+    const addUser = async (user) => {
+        let response = await fetchApi(`user`, {
+            method: 'POST',
+            header: { 'Content-Type': 'application/json' },
+            body: user,
+        });
+    };
+
+    const addUserHandler = (ev) => {
+        ev.preventDefault();
+
+        const time = timeInSeconds(
+            +document.querySelector('#minutes').value,
+            +document.querySelector('#seconds').value,
+        );
+        user['time'] = time;
+
+        console.log(user); // for debugging
+        addUser(user);
+    };
+
     return (
-        <form>
+        <form onSubmit={addUserHandler}>
             <div>
-                <input type="text" placeholder="Type new user's name" />
+                <input type="text" name="name" onChange={formChangeHandler} placeholder="Type new user's name" />
             </div>
             <div>
-                <input type="email" placeholder="Type new user's email" />
+                <input type="email" name="email" onChange={formChangeHandler} placeholder="Type new user's email" />
             </div>
             <div>
                 <label htmlFor="tests">Assign to test:</label>
-                <select id="tests" name="tests">
+                <select id="tests" name="test_id" defaultValue="default" onChange={formChangeHandler}>
+                    <option value="default" disabled hidden>
+                        Select...
+                    </option>
                     {/*Mapping tests to option values for dropdown*/}
                     {tests &&
                         tests.map((test) => {
                             return (
-                                <option key={test.id} value={test.name}>
+                                <option key={test.id} value={test.id}>
                                     {test.name}
                                 </option>
                             );
@@ -73,12 +95,15 @@ const NewUserInput = () => {
             </div>
             <div>
                 <label htmlFor="categories">Category:</label>
-                <select id="categories" name="categories">
+                <select id="categories" name="category_id" defaultValue="default" onChange={formChangeHandler}>
+                    <option value="default" disabled hidden>
+                        Select...
+                    </option>
                     {/*Mapping categories to option values for dropdown*/}
                     {categories &&
                         categories.map((category) => {
                             return (
-                                <option key={category.id} value={category.name}>
+                                <option key={category.id} value={category.id}>
                                     {category.name}
                                 </option>
                             );
@@ -91,9 +116,7 @@ const NewUserInput = () => {
                 <input type="number" id="seconds" name="seconds" min="0" max="60" />
             </div>
             <div>
-                <button type="button" onClick={addUserHandler}>
-                    Add User
-                </button>
+                <button type="submit">Add User</button>
             </div>
         </form>
     );
@@ -101,7 +124,7 @@ const NewUserInput = () => {
 
 const NewUserForm = () => {
     return (
-        <div className="">
+        <div>
             <NewUserHeading />
             <NewUserInput />
         </div>
