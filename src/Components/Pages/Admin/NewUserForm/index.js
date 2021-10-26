@@ -33,11 +33,9 @@ const NewUserInput = () => {
     const [user, setUser] = useState([]);
     const [value, setValue] = useState('default');
 
-    const timeInSeconds = (minutes, seconds) => {
-        console.log(minutes, seconds);
-        return minutes * 60 + seconds;
-    };
-
+    /**
+     * Handles changes to form components
+     */
     const formChangeHandler = (event) => {
         setUser((user) => ({
             ...user,
@@ -47,6 +45,9 @@ const NewUserInput = () => {
         setValue(event.target.value);
     };
 
+    /**
+     * Adds the user object to the database
+     */
     const addUser = async (user) => {
         let response = await fetchApi(`user`, {
             method: 'POST',
@@ -55,6 +56,9 @@ const NewUserInput = () => {
         });
     };
 
+    /**
+     * Handles the submit button action
+     */
     const addUserHandler = (ev) => {
         ev.preventDefault();
 
