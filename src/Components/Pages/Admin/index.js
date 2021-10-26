@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import LoginButton from '../../Atoms/LoginButton/LoginButton';
 import fetchApi from '../../../Hooks/useFetch';
 import NewUserForm from './NewUserForm';
+import Search from './Search';
 
 // This component is an example of displaying data from an API and keeping the front end up to date with any changes
 // made to the data at the API in real time without needing to reload the page.
@@ -27,9 +28,11 @@ const Admin = () => {
 
     return (
         <>
+            <p>Admin page</p>
             <LoginButton />
             <NewUserForm />
-            <p>Admin page</p>
+            <Search />
+
             {users &&
                 users.map((user) => {
                     return <p key={user.id}>{user.name}</p>;
