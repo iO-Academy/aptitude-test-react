@@ -1,6 +1,7 @@
 import Accordion from 'react-bootstrap/Accordion';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Table from 'react-bootstrap/Table';
+import { useEffect, useState } from 'react';
+import fetchApi from '../../../../Hooks/useFetch';
 
 const TableAccordion = (props) => {
     return (
@@ -19,10 +20,10 @@ const TableAccordion = (props) => {
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{props.userCategory}</td>
-                                <td>{props.testAllocated}</td>
-                                <td>{props.timeAllowed}</td>
-                                <td>{props.timerHidden}</td>
+                                <td>{props.user.category_name}</td>
+                                <td>{props.user.test_id}</td>
+                                <td>{props.user.time}</td>
+                                <td>{props.user.showTimer}</td>
                             </tr>
                         </tbody>
                     </Table>
