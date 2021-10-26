@@ -7,7 +7,6 @@ const QuestionView = (props) => {
     return (
         <>
             <QuestionTracker currentQuestionID={props.currentQuestionID} numberOfQuestions={props.numberOfQuestions} />
-            <FlagButton />
             <QuestionMain currentQuestion={props.currentQuestion} changeCurrentID={props.setCurrentQuestionId} />
             <NavButton action="next" />
             <NavButton action="previous" />
