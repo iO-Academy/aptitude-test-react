@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
+import fetchApi from '../../../Hooks/useFetch';
 
 const Test = () => {
     const [questions, setQuestions] = useState([]);
     const [currentQuestionId, setCurrentQuestionId] = useState(1);
     useEffect(async () => {
-        let data = await fetch('http://localhost:8080/question');
-        let results = await data.json();
-        setQuestions(results);
+        let data = await fetchApi('/question');
+        setQuestions(data.data);
     }, []);
     return (
         <>
