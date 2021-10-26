@@ -1,6 +1,8 @@
 import Table from 'react-bootstrap/Table';
+import TableAccordion from '../Accordion';
 
 const UserTable = (props) => {
+    console.log(props.users);
     return (
         <Table className="table mx-auto">
             <thead>
@@ -12,10 +14,17 @@ const UserTable = (props) => {
             <tbody>
                 {props.users.map((user) => {
                     return (
-                        <tr key={user.id}>
-                            <td scope="row">{user.name}</td>
-                            <td>{user.email}</td>
-                        </tr>
+                        <>
+                            <tr>
+                                <td>{user.name}</td>
+                                <td>{user.email}</td>
+                            </tr>
+                            <tr>
+                                <td colSpan={3}>
+                                    <TableAccordion user={user} />
+                                </td>
+                            </tr>
+                        </>
                     );
                 })}
             </tbody>
