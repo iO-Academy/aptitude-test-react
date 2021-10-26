@@ -62,6 +62,31 @@ const Admin = () => {
         }
     }, [users, tests]);
 
+    useEffect(() => {
+        if (users) {
+            let tempUsers = users.map((user) => {
+                if (user.showTimer === '1') {
+                    user.showTimer = 'yes';
+                } else {
+                    user.showTimer = 'no';
+                }
+                return user;
+            });
+            setNewUsers(tempUsers);
+        }
+    }, [users]);
+
+    useEffect(() => {
+        if (users) {
+            let tempUsers = users.map((user) => {
+                let timeMinutes = parseInt(user.time) / 60;
+                user.time = timeMinutes.toString() + 'm';
+                return user;
+            });
+            setNewUsers(tempUsers);
+        }
+    }, [users]);
+
     return (
         <>
             <LoginButton />
