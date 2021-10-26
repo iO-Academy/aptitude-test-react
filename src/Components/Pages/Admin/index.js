@@ -21,6 +21,10 @@ const Admin = () => {
         await getTests();
     }, []);
 
+    useEffect(() => {
+        tests ? getQuestions(tests) : '';
+    }, [tests]);
+
     // because it is abstracted here we have control when it occurs - once when component first mounted then whenever
     // we choose from that point onwards, thus no infinite recalling.
     const getUsers = async () => {
@@ -37,11 +41,18 @@ const Admin = () => {
         }
     };
 
-    const calculateTestTotalScores = async () => {
-        //Cycle through each test ID
-        //create a fetch request to question with the given test ID and count the result
-        //store total scores in an array
+    const getQuestions = (tests) => {
+        if (tests) {
+            tests.forEach(async (test) => {
+                let response = await fetchApi(`question?test_id=${test.id}`);
+                if (response.success) {
+                    totalScores.push(response.data.length);
+                }
+            });
+        }
     };
+
+    let totalScores = [];
 
     useEffect(() => {
         users ? setTable(<UserTable users={users} />) : '';
