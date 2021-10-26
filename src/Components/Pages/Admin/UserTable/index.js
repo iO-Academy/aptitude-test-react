@@ -2,6 +2,7 @@ import Table from 'react-bootstrap/Table';
 import TableAccordion from '../Accordion';
 import { useEffect, useState } from 'react';
 import fetchApi from '../../../../Hooks/useFetch';
+import './style.css';
 
 const UserTable = (props) => {
     //initial state of the tests is null until tests is populated
@@ -32,6 +33,16 @@ const UserTable = (props) => {
         }
     };
 
+    const makePercentageClass = (percentage) => {
+        if (percentage === 100) {
+            return 'perfect';
+        } else if (percentage >= 70) {
+            return 'pass';
+        } else {
+            return 'fail';
+        }
+    };
+
     return (
         <Table className="table mx-auto">
             <thead>
@@ -45,7 +56,7 @@ const UserTable = (props) => {
                 {props.users.map((user) => {
                     return (
                         <>
-                            <tr>
+                            <tr className={makePercentageClass(calcPercentage(user.id))}>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>{calcPercentage(user.id)}</td>

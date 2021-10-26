@@ -1,0 +1,12 @@
+.perfect {
+    color: #352556;
+    background-color: #ac97de;
+}
+.pass {
+    color: #2b7227;
+    background-color: #a4e591;
+}
+.fail {
+    color: #752121;
+    background-color: #e38585;
+}
