@@ -13,12 +13,14 @@ const Test = () => {
         useEffect(async () => {
             let res = await fetchApi('/question/' + currentQuestionId);
             setCurrentQuestion(res.data);
+            return currentQuestion;
         }, [currentQuestionId]);
     }
     find(currentQuestionId, setCurrentQuestion);
     return (
         <>
             <p>Hello Hello Testing Testing Quiz Time</p>
+            <p>{currentQuestion.text}</p>
         </>
     );
 };
