@@ -3,7 +3,6 @@ import TableAccordion from '../Accordion';
 import './style.css';
 
 const UserTable = (props) => {
-    console.log(props.users);
     return (
         <Table className="table-light table-borderless mx-auto">
             <thead className="tableHead">

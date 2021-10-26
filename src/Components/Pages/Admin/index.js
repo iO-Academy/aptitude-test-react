@@ -43,7 +43,7 @@ const Admin = () => {
     // this code replaces the value in user.testID for each user with the test name from the test with a matching ID
     useEffect(() => {
         if (users && tests) {
-            setEditedUsers(useJoin([users, 'test_id'], [tests, 'id', 'name']));
+            setEditedUsers(useJoin([users, 'test_id', 'testName'], [tests, 'id', 'name']));
         }
     }, [users, tests]);
 
