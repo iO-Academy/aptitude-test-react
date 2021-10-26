@@ -8,6 +8,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.24.0",
+    "fuse.js": "^6.4.6",
     "g": "^2.0.1",
     "node-sass": "^6.0.1",
     "prettier": "^2.3.2",
