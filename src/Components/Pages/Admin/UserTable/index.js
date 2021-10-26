@@ -2,15 +2,18 @@ import Table from 'react-bootstrap/Table';
 import TableAccordion from '../Accordion';
 import { useEffect, useState } from 'react';
 import fetchApi from '../../../../Hooks/useFetch';
+import useJoin from '../../../../Hooks/useJoin';
 
 const UserTable = (props) => {
     //initial state of the tests is null until tests is populated
     const [results, setResults] = useState(null);
+    const [userResults, setUserResults] = useState(null);
     // the use effect hook is passed a 2nd param of [], ensuring it only runs once when the component is first mounted
     useEffect(async () => {
         // common error: the code calling the API is often placed directly in here - abstracting it into its own
         // function (getUsers) is key to this pattern working
         await getResults();
+        setUserResults(props.users);
     }, []);
     const getResults = async () => {
         let response = await fetchApi(`result`);
@@ -18,7 +21,6 @@ const UserTable = (props) => {
             return setResults(response.data);
         }
     };
-
     const calcPercentage = (id) => {
         if (results) {
             let potato = results.filter((result) => {
@@ -31,7 +33,11 @@ const UserTable = (props) => {
             }
         }
     };
-
+    useEffect(() => {
+        if (results) {
+            setUserResults(useJoin([props.users, 'id', 'answers'], [results, 'resultId', 'answers']));
+        }
+    }, [results, props.users]);
     return (
         <Table className="table mx-auto">
             <thead>
