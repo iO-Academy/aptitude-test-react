@@ -35,7 +35,7 @@ const UserTable = (props) => {
     };
     useEffect(() => {
         if (results) {
-            setUserResults(useJoin([props.users, 'id', 'answers'], [results, 'resultId', 'answers']));
+            setUserResults(useJoin([props.users, 'id', 'testScore'], [results, 'resultId', 'score']));
         }
     }, [results, props.users]);
     return (

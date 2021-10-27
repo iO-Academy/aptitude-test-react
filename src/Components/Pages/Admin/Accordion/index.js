@@ -25,7 +25,7 @@ const TableAccordion = (props) => {
                                 <td>{props.user.test_id}</td>
                                 <td>{props.user.time}</td>
                                 <td>{props.user.showTimer}</td>
-                                <td>{props.user.score}</td>
+                                <td>{props.user.testScore}</td>
                             </tr>
                         </tbody>
                     </Table>
