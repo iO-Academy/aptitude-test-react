@@ -2,49 +2,28 @@ import Accordion from 'react-bootstrap/Accordion';
 import Table from 'react-bootstrap/Table';
 import { useEffect, useState } from 'react';
 import AdminModal from '../Modal';
-import fetchApi from '../../../../Hooks/useFetch';
 import './style.css';
+import getData from '../../../../Hooks/getData';
 
 const TableAccordion = ({ user }) => {
     // Set useState for results, show and questions
-    const [results, setResults] = useState(null);
     const [questions, setQuestions] = useState(null);
-    const [show, setShow] = useState(false);
+    const [{show + user.id}, setShow] = useState(false);
     const [adminModal, setModal] = useState(null);
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
 
     // On mount async and await fetching results and questions from API
     useEffect(async () => {
-        await getResults();
-        await getQuestions();
+        setQuestions(await getData('question'));
     }, []);
-    // Make the functionality to fetch results and questions from the API
-    const getResults = async () => {
-        let response = await fetchApi(`result`);
-        if (response.success) {
-            return setResults(response.data);
-        }
-    };
-    const getQuestions = async () => {
-        let response = await fetchApi(`question`);
-        if (response.success) {
-            return setQuestions(response.data);
-        }
-    };
     useEffect(() => {
-        questions && results
+        questions
             ? setModal(
-                  <AdminModal
-                      show={show}
-                      setShow={setShow}
-                      onHide={handleClose}
-                      results={results}
-                      questions={questions}
-                  />,
+                  <AdminModal show={show} setShow={setShow} onHide={handleClose} questions={questions} user={user} />,
               )
             : '';
-    }, [questions, results]);
+    }, [questions]);
     return (
         <Accordion>
             <Accordion.Item eventKey="0">

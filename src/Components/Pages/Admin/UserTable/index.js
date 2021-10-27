@@ -51,6 +51,7 @@ const UserTable = ({ users }) => {
             setEditedUsers(useJoin([resultsAnswers, 'id', 'timeTaken'], [results, 'id', 'time']));
         }
     }, [results, users]);
+
     return (
         <Table className="table table-borderless mx-auto">
             <thead className="tableHead table-light">

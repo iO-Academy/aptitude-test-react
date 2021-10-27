@@ -1,12 +1,16 @@
-//Import Modal, Button and Table components from react-bootstrap
+//Import Modal and Table components from react-bootstrap
 import { Modal } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
 
 // Create an AdminModal component
 const AdminModal = (props) => {
     // Set the component return to give modal content
+    let answersArray = [];
+    if (props.user.answers !== '' && typeof props.user.answers !== 'undefined') {
+        answersArray = Object.entries(JSON.parse(JSON.parse(props.user.answers)));
+    }
     return (
-        <Modal size="xl" show={props.show} onHide={props.onHide}>
+        <Modal size="xl" show={true} onHide={props.onHide}>
             {/* Modal header with title */}
             <Modal.Header closeButton>
                 <Modal.Title>Answers</Modal.Title>
@@ -25,13 +29,13 @@ const AdminModal = (props) => {
                     </thead>
                     {/* Map the questions and answers onto the modal table */}
                     <tbody>
-                        {props.questions.map((question) => {
+                        {answersArray.map((answer, key) => {
                             return (
-                                <tr key={question.id}>
-                                    <td>{question.id}</td>
-                                    <td>{question.text}</td>
-                                    <td>yi</td>
-                                    <td>yi</td>
+                                <tr key={key}>
+                                    <td>{key}</td>
+                                    <td>question will go here</td>
+                                    <td>correct answer will go here</td>
+                                    <td>{answer.answerID}</td>
                                 </tr>
                             );
                         })}
