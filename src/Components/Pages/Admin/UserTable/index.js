@@ -14,7 +14,9 @@ const UserTable = (props) => {
             </thead>
             <tbody className="tableBody">
                 {props.users.map((user) => {
-                    return (
+                    return user.isAdmin === '1' ? (
+                        <></>
+                    ) : (
                         <React.Fragment key={user.id}>
                             <tr className="border-top" key={user.id}>
                                 <td>{user.name}</td>
