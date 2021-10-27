@@ -5,7 +5,7 @@ import AdminModal from '../Modal';
 import fetchApi from '../../../../Hooks/useFetch';
 import './style.css';
 
-const TableAccordion = (props) => {
+const TableAccordion = ({ user }) => {
     // Set useState for results, show and questions
     const [results, setResults] = useState(null);
     const [questions, setQuestions] = useState(null);
@@ -53,20 +53,24 @@ const TableAccordion = (props) => {
                     <Table>
                         <thead>
                             <tr>
-                                <th>user category</th>
-                                <th>test allocated</th>
-                                <th>time allowed</th>
-                                <th>timer hidden</th>
+                                <th>User category</th>
+                                <th>Test allocated</th>
                                 <th>Score</th>
+                                <th>Time allowed(m)</th>
+                                <th>Time taken(m)</th>
+                                <th>Timer hidden</th>
+                                <th>Date</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{props.user.category_name}</td>
-                                <td>{props.user.testName}</td>
-                                <td>{props.user.time}</td>
-                                <td>{props.user.showTimer}</td>
-                                <td>{props.user.score}</td>
+                                <td>{user.category_name}</td>
+                                <td>{user.testName}</td>
+                                <td>{user.testScore}</td>
+                                <td>{parseInt(user.time) / 60}</td>
+                                <td>{user.timeTaken}</td>
+                                <td>{user.showTimer === '1' ? 'yes' : 'no'}</td>
+                                <td>{user.testDate}</td>
                                 <td>
                                     <button onClick={handleShow}>See answers</button>
                                     {adminModal}

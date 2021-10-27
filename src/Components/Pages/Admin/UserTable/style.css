@@ -1,15 +1,18 @@
-
 .perfect {
-    color: #352556;
-    background-color: #ac97de;
+    background-color: #c5acfe;
 }
+
 .pass {
-    color: #2b7227;
-    background-color: #a4e591;
+    background-color: #baffa6;
 }
+
 .fail {
     color: #752121;
     background-color: #e38585;
+/*=======*/
+/*    background-color: #ffb8b8;*/
+}
+
 
 .tableHead {
     color: #0F0028;
