@@ -8,7 +8,7 @@ import getData from '../../../../Hooks/getData';
 const TableAccordion = ({ user }) => {
     // Set useState for results, show and questions
     const [questions, setQuestions] = useState(null);
-    const [{show + user.id}, setShow] = useState(false);
+    const [show, setShow] = useState(false);
     const [adminModal, setModal] = useState(null);
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
@@ -23,7 +23,7 @@ const TableAccordion = ({ user }) => {
                   <AdminModal show={show} setShow={setShow} onHide={handleClose} questions={questions} user={user} />,
               )
             : '';
-    }, [questions]);
+    }, [questions, show]);
     return (
         <Accordion>
             <Accordion.Item eventKey="0">

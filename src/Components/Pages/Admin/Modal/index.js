@@ -10,7 +10,7 @@ const AdminModal = (props) => {
         answersArray = Object.entries(JSON.parse(JSON.parse(props.user.answers)));
     }
     return (
-        <Modal size="xl" show={true} onHide={props.onHide}>
+        <Modal size="xl" show={props.show} onHide={props.onHide}>
             {/* Modal header with title */}
             <Modal.Header closeButton>
                 <Modal.Title>Answers</Modal.Title>
