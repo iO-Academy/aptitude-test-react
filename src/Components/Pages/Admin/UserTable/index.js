@@ -4,7 +4,6 @@ import './style.css';
 import React from 'react';
 import { useEffect, useState } from 'react';
 import getData from '../../../../Hooks/getData';
-import fetchApi from '../../../../Hooks/useFetch';
 import useJoin from '../../../../Hooks/useJoin';
 
 const UserTable = ({ users }) => {
@@ -36,8 +35,7 @@ const UserTable = ({ users }) => {
             return 'perfect';
         } else if (percentage >= 70) {
             return 'pass';
-        } else percentage >= 0;
-        return 'fail';
+        } else return 'fail';
     };
 
     useEffect(() => {
