@@ -2,11 +2,22 @@
     color: #352556;
     background-color: #ac97de;
 }
+
 .pass {
     color: #2b7227;
     background-color: #a4e591;
 }
+
 .fail {
     color: #752121;
     background-color: #e38585;
+}
+
+.tableHead {
+    color: #0F0028;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.tableBody {
+    font-family: 'Inter', sans-serif;
 }
