@@ -47,7 +47,6 @@ const Test = () => {
         }
     };
 
-    console.log(userAnswers);
     return (
         <Container>
             <QuestionView
@@ -55,8 +54,8 @@ const Test = () => {
                 numberOfQuestions={numberOfQuestions}
                 currentQuestion={currentQuestion}
                 modifyQuestionId={modifyQuestionId}
+                updateUserAnswers={updateUserAnswers}
             />
-            <p onClick={() => updateUserAnswers(4, 5)}>updateUserAnswers test</p>
         </Container>
     );
 };
