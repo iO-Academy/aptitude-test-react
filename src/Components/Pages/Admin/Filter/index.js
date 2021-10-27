@@ -1,21 +1,15 @@
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownItems from './DropdownItems';
 import { useEffect, useState } from 'react';
-import fetchApi from '../../../../Hooks/useFetch';
+import useGetData from '../../../../Hooks/useGetData';
 import './style.css';
 
 const Filter = () => {
     const [categories, setCategories] = useState('null');
     const [dropdownItems, setDropdownItems] = useState(null);
 
-    const getCategories = async () => {
-        let response = await fetchApi(`category`);
-        if (response.success) {
-            return setCategories(response.data);
-        }
-    };
     useEffect(async () => {
-        await getCategories();
+        await setCategories(await useGetData('category'));
     }, []);
 
     useEffect(() => {
