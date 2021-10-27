@@ -1,15 +1,19 @@
 import { useEffect, useState } from 'react';
 import fetchApi from '../../../Hooks/useFetch';
+import QuestionView from '../QuestionView/QuestionView';
+import { Container } from 'react-bootstrap';
 
 const Test = () => {
     const [userAnswers, setUserAnswers] = useState({});
     const [questions, setQuestions] = useState([]);
     const [currentQuestionId, setCurrentQuestionId] = useState(1);
     const [currentQuestion, setCurrentQuestion] = useState([]);
+    const [numberOfQuestions, setNumberOfQuestions] = useState(0);
 
     useEffect(async () => {
         let data = await fetchApi('/question');
         setQuestions(data.data);
+        setNumberOfQuestions(data.data.length);
     }, []);
 
     function updateUserAnswers(currentQuestionId, userAnswer) {
@@ -20,7 +24,7 @@ const Test = () => {
         }
     }
 
-    function find(currentQuestionId, setCurrentQuestion) {
+    function findQuestion(currentQuestionId, setCurrentQuestion) {
         useEffect(async () => {
             let res = await fetchApi('/question/' + currentQuestionId);
             setCurrentQuestion(res.data);
@@ -29,7 +33,6 @@ const Test = () => {
     }
 
     function validateTestLength(targetQuestionId) {
-        let numberOfQuestions = questions.length;
         if (targetQuestionId > 0 && targetQuestionId <= numberOfQuestions) {
             return true;
         } else {
@@ -37,10 +40,8 @@ const Test = () => {
         }
     }
 
-    find(currentQuestionId, setCurrentQuestion);
+    findQuestion(currentQuestionId, setCurrentQuestion);
     const modifyQuestionId = (targetQuestionId) => {
-        // numberOfQuestions moved to global scope for re-use in updateUserAnswers function
-        // If statement turned into a function for validation re-use in updateUserAnswers function
         if (validateTestLength(targetQuestionId)) {
             setCurrentQuestionId(targetQuestionId);
         }
@@ -48,12 +49,15 @@ const Test = () => {
 
     console.log(userAnswers);
     return (
-        <>
-            <p>{currentQuestion.text}</p>
-            <p onClick={() => modifyQuestionId(3)}>Hello Hello Testing Testing Quiz Time</p>
-            <p>{currentQuestionId}</p>
+        <Container>
+            <QuestionView
+                currentQuestionId={currentQuestionId}
+                numberOfQuestions={numberOfQuestions}
+                currentQuestion={currentQuestion}
+                modifyQuestionId={modifyQuestionId}
+            />
             <p onClick={() => updateUserAnswers(4, 5)}>updateUserAnswers test</p>
-        </>
+        </Container>
     );
 };
 export default Test;
