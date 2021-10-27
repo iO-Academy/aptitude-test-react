@@ -3,7 +3,7 @@ import { Row } from 'react-bootstrap';
 
 const QuestionTracker = (props) => {
     return (
-        <Row>
+        <Row className="questionTracker">
             <h3>
                 Question <span className="highlight">{props.currentQuestionId}</span> of {props.numberOfQuestions}
             </h3>

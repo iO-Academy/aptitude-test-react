@@ -1,22 +1,15 @@
 import { Form, Row } from 'react-bootstrap';
 import './styles.scss';
-import { useEffect, useState } from 'react';
 
 const QuestionMain = (props) => {
-    const [qid, setQid] = useState(props.currentQuestionId);
-
     const handleClick = (e) => {
-        props.updateUserAnswers(qid, parseInt(e.target.value));
+        props.updateUserAnswers(props.currentQuestionId, parseInt(e.target.value));
     };
-
-    useEffect(() => {
-        setQid(props.currentQuestionId);
-    }, [props.userAnswers]);
 
     return (
         <Row className="questionContainer">
             <h3> {props.currentQuestion.text}</h3>
-            <Form>
+            <Form className="align-items-start">
                 <Form.Check
                     label={props.currentQuestion.option1}
                     type="radio"
