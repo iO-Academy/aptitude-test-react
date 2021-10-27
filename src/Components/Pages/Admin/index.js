@@ -2,11 +2,8 @@ import { useEffect, useState } from 'react';
 import LoginButton from '../../Atoms/LoginButton/LoginButton';
 import useJoin from '../../../Hooks/useJoin';
 import UserTable from './UserTable';
-<<<<<<< HEAD
 import Filter from './Filter';
-=======
 import useGetData from '../../../Hooks/useGetData';
->>>>>>> 8d944cdf983623c28688d94a69f90390327eb7c5
 import './style.css';
 
 // This component is an example of displaying data from an API and keeping the front end up to date with any changes
