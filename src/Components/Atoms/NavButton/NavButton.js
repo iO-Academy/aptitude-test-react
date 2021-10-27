@@ -9,8 +9,9 @@ const NavButton = (props) => {
     };
     return (
         <>
-            <button onClick={incrementQuestionId}>{props.action === 'next' ? 'next' : 'previous'}</button>
-            <p onClick={() => console.log(props.currentQuestionId)}>click here</p>
+            <button onClick={incrementQuestionId} className={props.action === 'next' ? 'nextButton' : 'previousButton'}>
+                {props.action === 'next' ? 'next' : 'previous'}
+            </button>
         </>
     );
 };

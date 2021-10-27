@@ -9,16 +9,22 @@ const QuestionView = (props) => {
             <QuestionTracker currentQuestionId={props.currentQuestionId} numberOfQuestions={props.numberOfQuestions} />
             <FlagButton />
             <QuestionMain currentQuestion={props.currentQuestion} changeCurrentId={props.setCurrentQuestionId} />
-            <NavButton
-                action="next"
-                currentQuestionId={props.currentQuestionId}
-                changeCurrentId={props.changeCurrentId}
-            />
-            <NavButton
-                action="previous"
-                currentQuestionId={props.currentQuestionId}
-                changeCurrentId={props.changeCurrentId}
-            />
+            {props.currentQuestionId !== 1 && (
+                <NavButton
+                    action="previous"
+                    currentQuestionId={props.currentQuestionId}
+                    changeCurrentId={props.changeCurrentId}
+                    numberOfQuestions={props.numberOfQuestions}
+                />
+            )}
+            {props.currentQuestionId !== props.numberOfQuestions && (
+                <NavButton
+                    action="next"
+                    currentQuestionId={props.currentQuestionId}
+                    changeCurrentId={props.changeCurrentId}
+                    numberOfQuestions={props.numberOfQuestions}
+                />
+            )}
         </>
     );
 };

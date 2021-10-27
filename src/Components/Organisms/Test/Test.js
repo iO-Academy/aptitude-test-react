@@ -27,7 +27,11 @@ const Test = () => {
     };
     return (
         <>
-            <QuestionView currentQuestionId={currentQuestionId} changeCurrentId={setCurrentQuestionId} />
+            <QuestionView
+                currentQuestionId={currentQuestionId}
+                changeCurrentId={setCurrentQuestionId}
+                numberOfQuestions={5}
+            />
         </>
     );
 };
