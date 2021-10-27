@@ -3,7 +3,7 @@ import TableAccordion from '../Accordion';
 import './style.css';
 import React from 'react';
 import { useEffect, useState } from 'react';
-import useGetData from '../../../../Hooks/getData';
+import useGetData from '../../../../Hooks/useGetData';
 import useJoin from '../../../../Hooks/useJoin';
 
 const UserTable = ({ users }) => {
