@@ -3,7 +3,7 @@ import TableAccordion from '../Accordion';
 import './style.css';
 import React from 'react';
 
-const UserTable = (props) => {
+const UserTable = ({ users }) => {
     return (
         <Table className="table-light table-borderless mx-auto">
             <thead className="tableHead">
@@ -13,7 +13,7 @@ const UserTable = (props) => {
                 </tr>
             </thead>
             <tbody className="tableBody">
-                {props.users.map((user) => {
+                {users.map((user) => {
                     return user.isAdmin === '1' ? (
                         <></>
                     ) : (
