@@ -1,9 +1,20 @@
-import { Container, Form } from 'react-bootstrap';
+import { Form, Row } from 'react-bootstrap';
 import './styles.scss';
+import { useEffect, useState } from 'react';
 
 const QuestionMain = (props) => {
+    const [qid, setQid] = useState(props.currentQuestionId);
+
+    const handleClick = (e) => {
+        props.updateUserAnswers(qid, parseInt(e.target.value));
+    };
+
+    useEffect(() => {
+        setQid(props.currentQuestionId);
+    }, [props.userAnswers]);
+
     return (
-        <Container className="questionContainer">
+        <Row className="questionContainer">
             <h3> {props.currentQuestion.text}</h3>
             <Form>
                 <Form.Check
@@ -12,7 +23,8 @@ const QuestionMain = (props) => {
                     id="option1"
                     value="1"
                     name="currentQuestion"
-                    onClick={(e) => props.updateUserAnswers(props.currentQuestionId, parseInt(e.target.value))}
+                    onClick={(e) => handleClick(e)}
+                    {...(props.userAnswers[props.currentQuestionId] === 1 ? { checked: true } : {})}
                 />
 
                 <Form.Check
@@ -21,7 +33,8 @@ const QuestionMain = (props) => {
                     id="option2"
                     value="2"
                     name="currentQuestion"
-                    onClick={(e) => props.updateUserAnswers(props.currentQuestionId, parseInt(e.target.value))}
+                    onClick={(e) => handleClick(e)}
+                    {...(props.userAnswers[props.currentQuestionId] === 2 ? { checked: 'true' } : {})}
                 />
 
                 <Form.Check
@@ -30,7 +43,8 @@ const QuestionMain = (props) => {
                     id="option3"
                     value="3"
                     name="currentQuestion"
-                    onClick={(e) => props.updateUserAnswers(props.currentQuestionId, parseInt(e.target.value))}
+                    onClick={(e) => handleClick(e)}
+                    {...(props.userAnswers[props.currentQuestionId] === 3 ? { checked: 'true' } : {})}
                 />
 
                 <Form.Check
@@ -39,7 +53,8 @@ const QuestionMain = (props) => {
                     id="option4"
                     value="4"
                     name="currentQuestion"
-                    onClick={(e) => props.updateUserAnswers(props.currentQuestionId, parseInt(e.target.value))}
+                    onClick={(e) => handleClick(e)}
+                    {...(props.userAnswers[props.currentQuestionId] === 4 ? { checked: 'true' } : {})}
                 />
 
                 <Form.Check
@@ -48,10 +63,11 @@ const QuestionMain = (props) => {
                     id="option5"
                     value="5"
                     name="currentQuestion"
-                    onClick={(e) => props.updateUserAnswers(String(props.currentQuestionId), parseInt(e.target.value))}
+                    onClick={(e) => handleClick(e)}
+                    {...(props.userAnswers[props.currentQuestionId] === 5 ? { checked: 'true' } : {})}
                 />
             </Form>
-        </Container>
+        </Row>
     );
 };
 

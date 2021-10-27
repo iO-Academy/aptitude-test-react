@@ -21,7 +21,6 @@ const Test = () => {
             let currentAnswers = userAnswers;
             currentAnswers[currentQuestionId] = userAnswer;
             setUserAnswers(currentAnswers);
-            console.log(userAnswers);
         }
     };
     const validateTestLength = (targetQuestionId) => {
@@ -31,9 +30,9 @@ const Test = () => {
             return false;
         }
     };
-    const findQuestion = () => {
+    const findQuestion = (id) => {
         if (questions.length) {
-            let tempQ = questions[currentQuestionId - 1];
+            let tempQ = questions[id - 1];
             setCurrentQuestion(tempQ);
         }
     };
@@ -50,7 +49,7 @@ const Test = () => {
     }, []);
     useEffect(async () => {
         findQuestion(currentQuestionId);
-    }, [currentQuestionId]);
+    }); //removed dependency to ensure render on first load
 
     return (
         <Container>
@@ -61,6 +60,7 @@ const Test = () => {
                 modifyQuestionId={modifyQuestionId}
                 updateUserAnswers={updateUserAnswers}
                 changeCurrentId={setCurrentQuestionId}
+                userAnswers={userAnswers}
             />
         </Container>
     );
