@@ -12,6 +12,7 @@ const QuestionMain = (props) => {
                     id="option1"
                     value="1"
                     name="currentQuestion"
+                    onClick={(e) => props.updateUserAnswers(props.currentQuestionId, parseInt(e.target.value))}
                 />
 
                 <Form.Check
@@ -20,6 +21,7 @@ const QuestionMain = (props) => {
                     id="option2"
                     value="2"
                     name="currentQuestion"
+                    onClick={(e) => props.updateUserAnswers(props.currentQuestionId, parseInt(e.target.value))}
                 />
 
                 <Form.Check
@@ -28,6 +30,7 @@ const QuestionMain = (props) => {
                     id="option3"
                     value="3"
                     name="currentQuestion"
+                    onClick={(e) => props.updateUserAnswers(props.currentQuestionId, parseInt(e.target.value))}
                 />
 
                 <Form.Check
@@ -36,6 +39,7 @@ const QuestionMain = (props) => {
                     id="option4"
                     value="4"
                     name="currentQuestion"
+                    onClick={(e) => props.updateUserAnswers(props.currentQuestionId, parseInt(e.target.value))}
                 />
 
                 <Form.Check
@@ -44,6 +48,7 @@ const QuestionMain = (props) => {
                     id="option5"
                     value="5"
                     name="currentQuestion"
+                    onClick={(e) => props.updateUserAnswers(String(props.currentQuestionId), parseInt(e.target.value))}
                 />
             </Form>
         </Container>

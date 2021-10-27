@@ -6,7 +6,11 @@ const QuestionView = (props) => {
     return (
         <>
             <QuestionTracker currentQuestionId={props.currentQuestionId} numberOfQuestions={props.numberOfQuestions} />
-            <QuestionMain currentQuestion={props.currentQuestion} />
+            <QuestionMain
+                currentQuestion={props.currentQuestion}
+                updateUserAnswers={props.updateUserAnswers}
+                currentQuestionId={props.currentQuestionId}
+            />
             {props.currentQuestionId !== 1 && (
                 <NavButton
                     action="previous"

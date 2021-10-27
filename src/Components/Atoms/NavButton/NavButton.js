@@ -1,15 +1,15 @@
 import './navButtonStyles.scss';
 const NavButton = (props) => {
-    const incrementQuestionId = () => {
+    const handleClick = () => {
         if (props.action === 'next') {
-            props.changeCurrentId(props.currentQuestionId + 1);
+            props.modifyQuestionId(props.changeCurrentId(props.currentQuestionId + 1));
         } else if (props.action === 'previous') {
-            props.changeCurrentId(props.currentQuestionId - 1);
+            props.modifyQuestionId(props.changeCurrentId(props.currentQuestionId - 1));
         }
     };
     return (
         <>
-            <button onClick={incrementQuestionId} className={props.action === 'next' ? 'nextButton' : 'previousButton'}>
+            <button onClick={handleClick} className={props.action === 'next' ? 'nextButton' : 'previousButton'}>
                 {props.action === 'next' ? 'next' : 'previous'}
             </button>
         </>
