@@ -7,11 +7,11 @@ import fetchApi from './useFetch';
  * @param url
  * @returns {Promise<*>}
  */
-const getData = async (url) => {
+const useGetData = async (url) => {
     let response = await fetchApi(url);
     if (response.success) {
         return response.data;
     }
 };
 
-export default getData;
+export default useGetData;

@@ -3,7 +3,6 @@ import Table from 'react-bootstrap/Table';
 import './style.css';
 
 const TableAccordion = ({ user }) => {
-    console.log(user);
     return (
         <Accordion>
             <Accordion.Item eventKey="0">
@@ -25,7 +24,11 @@ const TableAccordion = ({ user }) => {
                             <tr>
                                 <td>{user.category_name}</td>
                                 <td>{user.testName}</td>
-                                <td>{user.testScore + '/' + user.testLength}</td>
+                                <td>
+                                    {user.testScore === '' && user.testLength === ''
+                                        ? 'N/A'
+                                        : user.testScore + '/' + user.testLength}
+                                </td>
                                 <td>{parseInt(user.time) / 60}</td>
                                 <td>{user.timeTaken}</td>
                                 <td>{user.showTimer === '1' ? 'yes' : 'no'}</td>

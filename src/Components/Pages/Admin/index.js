@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import LoginButton from '../../Atoms/LoginButton/LoginButton';
 import useJoin from '../../../Hooks/useJoin';
 import UserTable from './UserTable';
-import getData from '../../../Hooks/getData';
+import useGetData from '../../../Hooks/getData';
 import './style.css';
 
 // This component is an example of displaying data from an API and keeping the front end up to date with any changes
@@ -19,9 +19,9 @@ const Admin = () => {
     useEffect(async () => {
         // common error: the code calling the API is often placed directly in here - abstracting it into its own
         // function (getUsers) is key to this pattern working
-        setUsers(await getData('user'));
-        setTests(await getData('test'));
-        setResults(await getData('result'));
+        setUsers(await useGetData('user'));
+        setTests(await useGetData('test'));
+        setResults(await useGetData('result'));
         setEditedUsers(users);
     }, []);
     // this code replaces the value in user.testID for each user with the test name from the test with a matching ID
