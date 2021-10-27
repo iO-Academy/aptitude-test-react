@@ -3,6 +3,7 @@
  *
  * @param data1 set of data from the fetchAPI that we want to join on to
  * @param data1key1 the key we want to map on to
+ * @param data2key2 the name of the new key were putting the data on to
  * @param data2 set of data from the fetchAPI that we want to join in to data1
  * @param data2key1 the key we're mapping on to data1key1
  * @param data2key2 the key we're joining the value data in from.
