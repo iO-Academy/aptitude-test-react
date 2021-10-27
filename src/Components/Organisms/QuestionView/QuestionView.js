@@ -11,8 +11,24 @@ const QuestionView = (props) => {
                 updateUserAnswers={props.updateUserAnswers}
                 currentQuestionId={props.currentQuestionId}
             />
-            <NavButton action="next" modifyQuestionId={props.modifyQuestionId} />
-            <NavButton action="previous" modifyQuestionId={props.modifyQuestionId} />
+            {props.currentQuestionId !== 1 && (
+                <NavButton
+                    action="previous"
+                    currentQuestionId={props.currentQuestionId}
+                    changeCurrentId={props.changeCurrentId}
+                    numberOfQuestions={props.numberOfQuestions}
+                    modifyQuestionId={props.modifyQuestionId}
+                />
+            )}
+            {props.currentQuestionId !== props.numberOfQuestions && (
+                <NavButton
+                    action="next"
+                    currentQuestionId={props.currentQuestionId}
+                    changeCurrentId={props.changeCurrentId}
+                    numberOfQuestions={props.numberOfQuestions}
+                    modifyQuestionId={props.modifyQuestionId}
+                />
+            )}
         </>
     );
 };

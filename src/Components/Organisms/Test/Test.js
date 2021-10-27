@@ -21,6 +21,7 @@ const Test = () => {
             let currentAnswers = userAnswers;
             currentAnswers[currentQuestionId] = userAnswer;
             setUserAnswers(currentAnswers);
+            console.log(userAnswers);
         }
     }
 
@@ -55,6 +56,7 @@ const Test = () => {
                 currentQuestion={currentQuestion}
                 modifyQuestionId={modifyQuestionId}
                 updateUserAnswers={updateUserAnswers}
+                changeCurrentId={setCurrentQuestionId}
             />
         </Container>
     );
