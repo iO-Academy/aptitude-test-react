@@ -24,11 +24,11 @@ const UserTable = (props) => {
     };
     const calcPercentage = (id) => {
         if (results) {
-            let potato = results.filter((result) => {
+            let resultScore = results.filter((result) => {
                 return result.id === id;
             });
-            if (potato.length !== 0) {
-                return Math.round((potato[0].score / potato[0].testLength) * 100);
+            if (resultScore.length !== 0) {
+                return Math.round((resultScore[0].score / resultScore[0].testLength) * 100);
             } else {
                 return '';
             }
