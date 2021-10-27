@@ -1,0 +1,20 @@
+.perfect {
+    background-color: #c5acfe;
+}
+
+.pass {
+    background-color: #baffa6;
+}
+
+.fail {
+    background-color: #ffb8b8;
+}
+
+.tableHead {
+    color: #0F0028;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.tableBody {
+    font-family: 'Inter', sans-serif;
+}

@@ -1,0 +1,17 @@
+.dropdown-toggle:hover,
+.dropdown-toggle:active {
+    background-color: #0F0028;
+    color: #5FFFB4;
+}
+
+.dropdown-toggle {
+    border: none;
+    font-family: 'JetBrains Mono';
+}
+
+.dropdown-menu,
+.dropdown-toggle {
+    background-color: #5FFFB4;
+    color: #0F0028;
+}
+
