@@ -24,33 +24,44 @@ const UserTable = (props) => {
     };
     const calcPercentage = (id) => {
         if (results) {
-            let potato = results.filter((result) => {
+            let resultScore = results.filter((result) => {
                 return result.id === id;
             });
-            if (potato.length !== 0) {
-                return Math.round((potato[0].score / potato[0].testLength) * 100);
+            if (resultScore.length !== 0) {
+                return Math.round((resultScore[0].score / resultScore[0].testLength) * 100);
             } else {
-                return 0;
+                return '';
             }
         }
     };
+
+    const makePercentageClass = (percentage) => {
+        if (percentage === '') {
+            return 'table-light';
+        } else if (percentage === 100) {
+            return 'perfect';
+        } else if (percentage >= 70) {
+            return 'pass';
+        } else percentage >= 0;
+        return 'fail';
+    };
+
     useEffect(() => {
         if (results) {
-            let resultsDate = useJoin([props.users, 'id', 'testDate'], [results, 'resultId', 'dateCreated']).map(
-                (user) => {
-                    let userTestDateArray = user.testDate.split(':');
-                    userTestDateArray.pop();
-                    user.testDate = userTestDateArray.join(':');
-                    return user;
-                },
-            );
-            let resultsScore = useJoin([resultsDate, 'id', 'testScore'], [results, 'resultId', 'score']);
-            setUserResults(useJoin([resultsScore, 'id', 'timeTaken'], [results, 'resultId', 'time']));
+            let resultsDate = useJoin([props.users, 'id', 'testDate'], [results, 'id', 'dateCreated']).map((user) => {
+                let userTestDateArray = user.testDate.split(':');
+                userTestDateArray.pop();
+                user.testDate = userTestDateArray.join(':');
+                return user;
+            });
+            let resultsScore = useJoin([resultsDate, 'id', 'testScore'], [results, 'id', 'score']);
+            setUserResults(useJoin([resultsScore, 'id', 'timeTaken'], [results, 'id', 'time']));
         }
     }, [results, props.users]);
+
     return (
-        <Table className="table-light table-borderless mx-auto">
-            <thead className="tableHead">
+        <Table className="table table-borderless mx-auto">
+            <thead className="tableHead table-light">
                 <tr className="border-3 border-top-0 border-end-0 border-start-0">
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
@@ -63,12 +74,12 @@ const UserTable = (props) => {
                         <></>
                     ) : (
                         <React.Fragment key={user.id}>
-                            <tr className="border-top" key={user.id}>
+                            <tr className={makePercentageClass(calcPercentage(user.id)) + ' border-top'} key={user.id}>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>{calcPercentage(user.id)}</td>
                             </tr>
-                            <tr key={user.id + 'a'}>
+                            <tr className={makePercentageClass(calcPercentage(user.id))} key={user.id + 'a'}>
                                 <td colSpan={3}>
                                     <TableAccordion user={user} />
                                 </td>
