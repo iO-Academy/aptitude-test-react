@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import LoginButton from '../../Atoms/LoginButton/LoginButton';
-import fetchApi from '../../../Hooks/useFetch';
 import useJoin from '../../../Hooks/useJoin';
 import UserTable from './UserTable';
+import getData from '../../../Hooks/getData';
 import './style.css';
 
 // This component is an example of displaying data from an API and keeping the front end up to date with any changes
@@ -18,28 +18,10 @@ const Admin = () => {
     useEffect(async () => {
         // common error: the code calling the API is often placed directly in here - abstracting it into its own
         // function (getUsers) is key to this pattern working
-        await getUsers();
-        await getTest();
+        setUsers(await getData('user'));
+        setTests(await getData('test'));
         setEditedUsers(users);
     }, []);
-
-    // because it is abstracted here we have control when it occurs - once when component first mounted then whenever
-    // we choose from that point onwards, thus no infinite recalling.
-    const getUsers = async () => {
-        let response = await fetchApi(`user`);
-        if (response.success) {
-            return setUsers(response.data);
-        }
-    };
-
-    // because it is abstracted here we have control when it occurs - once when component first mounted then whenever
-    // we choose from that point onwards, thus no infinite recalling.
-    const getTest = async () => {
-        let response = await fetchApi(`test`);
-        if (response.success) {
-            return setTests(response.data);
-        }
-    };
     // this code replaces the value in user.testID for each user with the test name from the test with a matching ID
     useEffect(() => {
         if (users && tests) {
@@ -62,7 +44,7 @@ const Admin = () => {
             // Timer Allowed
             let tempUsers2 = tempUsers1.map((user) => {
                 let timeMinutes = parseInt(user.time) / 60;
-                user.time = timeMinutes.toString() + 'm';
+                user.time = timeMinutes.toString();
                 return user;
             });
             setEditedUsers(tempUsers2);
