@@ -7,46 +7,51 @@ const Test = () => {
     const [userAnswers, setUserAnswers] = useState({});
     const [questions, setQuestions] = useState([]);
     const [currentQuestionId, setCurrentQuestionId] = useState(1);
-    const [currentQuestion, setCurrentQuestion] = useState([]);
+    const [currentQuestion, setCurrentQuestion] = useState({});
     const [numberOfQuestions, setNumberOfQuestions] = useState(0);
-
-    useEffect(async () => {
-        let data = await fetchApi('/question');
-        setQuestions(data.data);
-        setNumberOfQuestions(data.data.length);
-    }, []);
-
-    function updateUserAnswers(currentQuestionId, userAnswer) {
+    const createQIds = (data) => {
+        let qIdCount = 0;
+        data.data.forEach((question) => {
+            question.qId = ++qIdCount;
+        });
+        return data.data;
+    };
+    const updateUserAnswers = (currentQuestionId, userAnswer) => {
         if (userAnswer >= 1 && userAnswer <= 5 && validateTestLength(currentQuestionId)) {
             let currentAnswers = userAnswers;
             currentAnswers[currentQuestionId] = userAnswer;
             setUserAnswers(currentAnswers);
             console.log(userAnswers);
         }
-    }
-
-    function findQuestion(currentQuestionId, setCurrentQuestion) {
-        useEffect(async () => {
-            let res = await fetchApi('/question/' + currentQuestionId);
-            setCurrentQuestion(res.data);
-            return currentQuestion;
-        }, [currentQuestionId]);
-    }
-
-    function validateTestLength(targetQuestionId) {
+    };
+    const validateTestLength = (targetQuestionId) => {
         if (targetQuestionId > 0 && targetQuestionId <= numberOfQuestions) {
             return true;
         } else {
             return false;
         }
-    }
-
-    findQuestion(currentQuestionId, setCurrentQuestion);
+    };
+    const findQuestion = () => {
+        if (questions.length) {
+            let tempQ = questions[currentQuestionId - 1];
+            setCurrentQuestion(tempQ);
+        }
+    };
     const modifyQuestionId = (targetQuestionId) => {
         if (validateTestLength(targetQuestionId)) {
             setCurrentQuestionId(targetQuestionId);
         }
     };
+    useEffect(async () => {
+        let data = await fetchApi('/question');
+        let res = createQIds(data);
+        setQuestions(res);
+        setNumberOfQuestions(data.data.length);
+        modifyQuestionId(1);
+    }, []);
+    useEffect(async () => {
+        findQuestion(currentQuestionId);
+    }, [currentQuestionId]);
 
     return (
         <Container>
@@ -61,4 +66,5 @@ const Test = () => {
         </Container>
     );
 };
+
 export default Test;
