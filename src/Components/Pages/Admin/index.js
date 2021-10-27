@@ -62,7 +62,7 @@ const Admin = () => {
             // Timer Allowed
             let tempUsers2 = tempUsers1.map((user) => {
                 let timeMinutes = parseInt(user.time) / 60;
-                user.time = timeMinutes.toString() + 'm';
+                user.time = timeMinutes.toString();
                 return user;
             });
             setEditedUsers(tempUsers2);

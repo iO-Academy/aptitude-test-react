@@ -11,12 +11,12 @@ const TableAccordion = (props) => {
                     <Table>
                         <thead>
                             <tr>
-                                <th>user category</th>
-                                <th>test allocated</th>
-                                <th>time allowed</th>
-                                <th>timer hidden</th>
+                                <th>User category</th>
+                                <th>Test allocated</th>
                                 <th>Score</th>
-                                <th>Time taken</th>
+                                <th>Time allowed(m)</th>
+                                <th>Time taken(m)</th>
+                                <th>Timer hidden</th>
                                 <th>Date</th>
                             </tr>
                         </thead>
@@ -24,10 +24,10 @@ const TableAccordion = (props) => {
                             <tr>
                                 <td>{props.user.category_name}</td>
                                 <td>{props.user.testName}</td>
-                                <td>{props.user.time}</td>
-                                <td>{props.user.showTimer}</td>
                                 <td>{props.user.testScore}</td>
+                                <td>{props.user.time}</td>
                                 <td>{props.user.timeTaken}</td>
+                                <td>{props.user.showTimer}</td>
                                 <td>{props.user.testDate}</td>
                             </tr>
                         </tbody>
