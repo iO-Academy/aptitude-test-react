@@ -35,7 +35,16 @@ const UserTable = (props) => {
     };
     useEffect(() => {
         if (results) {
-            setUserResults(useJoin([props.users, 'id', 'testScore'], [results, 'resultId', 'score']));
+            let resultsDate = useJoin([props.users, 'id', 'testDate'], [results, 'resultId', 'dateCreated']).map(
+                (user) => {
+                    let userTestDateArray = user.testDate.split(':');
+                    userTestDateArray.pop();
+                    user.testDate = userTestDateArray.join(':');
+                    return user;
+                },
+            );
+            let resultsScore = useJoin([resultsDate, 'id', 'testScore'], [results, 'resultId', 'score']);
+            setUserResults(useJoin([resultsScore, 'id', 'timeTaken'], [results, 'resultId', 'time']));
         }
     }, [results, props.users]);
     return (
