@@ -3,6 +3,7 @@ import LoginButton from '../../Atoms/LoginButton/LoginButton';
 import fetchApi from '../../../Hooks/useFetch';
 import useJoin from '../../../Hooks/useJoin';
 import UserTable from './UserTable';
+import Filter from './Filter';
 import './style.css';
 
 // This component is an example of displaying data from an API and keeping the front end up to date with any changes
@@ -76,6 +77,7 @@ const Admin = () => {
         <div className="adminPage p-3">
             <div className="container">
                 <h1 className="adminh1">Admin page</h1>
+                <Filter />
                 {table}
                 <LoginButton />
             </div>
