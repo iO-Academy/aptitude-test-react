@@ -47,6 +47,7 @@ const Test = () => {
         let res = createQIds(data);
         setQuestions(res);
         setNumberOfQuestions(data.data.length);
+        modifyQuestionId(1);
     }, []);
     useEffect(async () => {
         findQuestion(currentQuestionId);
