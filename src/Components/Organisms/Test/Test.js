@@ -8,19 +8,26 @@ const Test = () => {
     const [currentQuestionId, setCurrentQuestionId] = useState(1);
     const [currentQuestion, setCurrentQuestion] = useState([]);
     const [numberOfQuestions, setNumberOfQuestions] = useState(0);
+    const createQIds = (data) => {
+        let qIdCount = 0;
+        data.data.forEach((question) => {
+            question.qId = ++qIdCount;
+        });
+        return data.data;
+    };
     useEffect(async () => {
         let data = await fetchApi('/question');
-        setQuestions(data.data);
+        let res = createQIds(data);
+        setQuestions(res);
         setNumberOfQuestions(data.data.length);
     }, []);
-    function find(currentQuestionId, setCurrentQuestion) {
-        useEffect(async () => {
-            let res = await fetchApi('/question/' + currentQuestionId);
-            setCurrentQuestion(res.data);
-            return currentQuestion;
-        }, [currentQuestionId]);
-    }
-    find(currentQuestionId, setCurrentQuestion);
+    const findQuestion = (currentQuestionId) => {
+        let tempQ = questions[currentQuestionId - 1];
+        setCurrentQuestion(tempQ);
+    };
+    useEffect(async () => {
+        findQuestion(currentQuestionId);
+    }, [currentQuestionId]);
     const modifyQuestionId = (targetQuestionId) => {
         if (targetQuestionId > 0 && targetQuestionId <= numberOfQuestions) {
             setCurrentQuestionId(targetQuestionId);
