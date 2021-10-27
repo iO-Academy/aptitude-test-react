@@ -1,6 +1,7 @@
 import Table from 'react-bootstrap/Table';
 import TableAccordion from '../Accordion';
 import './style.css';
+import React from 'react';
 
 const UserTable = (props) => {
     return (
@@ -14,7 +15,7 @@ const UserTable = (props) => {
             <tbody className="tableBody">
                 {props.users.map((user) => {
                     return (
-                        <>
+                        <React.Fragment key={user.id}>
                             <tr className="border-top" key={user.id}>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
@@ -24,7 +25,7 @@ const UserTable = (props) => {
                                     <TableAccordion user={user} />
                                 </td>
                             </tr>
-                        </>
+                        </React.Fragment>
                     );
                 })}
             </tbody>
