@@ -1,47 +1,31 @@
+//Import Modal, Button and Table components from react-bootstrap
 import { Modal } from 'react-bootstrap';
-import { Button } from 'react-bootstrap';
-import fetchApi from '../../../../Hooks/useFetch';
-import { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 
-const AdminModal = () => {
-    const [results, setResults] = useState(null);
-    const [questions, setQuestions] = useState(null);
-    useEffect(async () => {
-        await getResults();
-        await getQuestions();
-    }, []);
-    const getResults = async () => {
-        let response = await fetchApi(`result`);
-        if (response.success) {
-            return setResults(response.data);
-        }
-    };
-    const getQuestions = async () => {
-        let response = await fetchApi(`question`);
-        if (response.success) {
-            return setQuestions(response.data);
-        }
-    };
-
+// Create an AdminModal component
+const AdminModal = (props) => {
+    // Set the component return to give modal content
     return (
-        <Modal.Dialog>
+        <Modal size="xl" show={props.show} onHide={props.onHide}>
+            {/* Modal header with title */}
             <Modal.Header closeButton>
                 <Modal.Title>Answers</Modal.Title>
             </Modal.Header>
-
+            {/* Modal body */}
             <Modal.Body>
                 <Table className="table mx-auto">
                     <thead>
                         <tr>
+                            {/* Headings for modal table */}
                             <th scope="col">Question Number</th>
                             <th scope="col">Question</th>
                             <th scope="col">Correct Answer</th>
                             <th scope="col">Applicant Answer</th>
                         </tr>
                     </thead>
+                    {/* Map the questions and answers onto the modal table */}
                     <tbody>
-                        {questions.map((question) => {
+                        {props.questions.map((question) => {
                             return (
                                 <tr key={question.id}>
                                     <td>{question.id}</td>
@@ -54,12 +38,7 @@ const AdminModal = () => {
                     </tbody>
                 </Table>
             </Modal.Body>
-
-            <Modal.Footer>
-                <Button variant="secondary">Close</Button>
-                <Button variant="primary">Save changes</Button>
-            </Modal.Footer>
-        </Modal.Dialog>
+        </Modal>
     );
 };
 

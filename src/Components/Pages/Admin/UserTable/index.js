@@ -3,10 +3,12 @@ import TableAccordion from '../Accordion';
 import { useEffect, useState } from 'react';
 import fetchApi from '../../../../Hooks/useFetch';
 import './style.css';
+import useJoin from '../../../../Hooks/useJoin';
 
 const UserTable = (props) => {
     //initial state of the tests is null until tests is populated
     const [results, setResults] = useState(null);
+    const [userResults, setUserResults] = useState(props.users);
     // the use effect hook is passed a 2nd param of [], ensuring it only runs once when the component is first mounted
     useEffect(async () => {
         // common error: the code calling the API is often placed directly in here - abstracting it into its own
@@ -43,6 +45,9 @@ const UserTable = (props) => {
         }
     };
 
+    useEffect(() => {
+        setUserResults(useJoin([props.users, 'id', 'answers'], [results, 'resultId', 'answers']));
+    }, [results, props.users]);
     return (
         <Table className="table mx-auto">
             <thead>
@@ -53,7 +58,7 @@ const UserTable = (props) => {
                 </tr>
             </thead>
             <tbody>
-                {props.users.map((user) => {
+                {userResults.map((user) => {
                     return (
                         <>
                             <tr className={makePercentageClass(calcPercentage(user.id))}>
