@@ -5,7 +5,7 @@ const QuestionTracker = (props) => {
     return (
         <Container>
             <h3>
-                Question <span className="highlight">{props.currentQuestionID}</span> of {props.numberOfQuestions}
+                Question <span className="highlight">{props.currentQuestionId}</span> of {props.numberOfQuestions}
             </h3>
         </Container>
     );

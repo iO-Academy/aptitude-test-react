@@ -27,14 +27,17 @@ const Test = () => {
         }
     };
     return (
-        <Container>
-            <QuestionView
-                currentQuestionId={currentQuestionId}
-                numberOfQuestions={numberOfQuestions}
-                currentQuestion={currentQuestion}
-                modifyQuestionId={modifyQuestionId}
-            />
-        </Container>
+        <>
+            <Container>
+                <QuestionView
+                    currentQuestionId={currentQuestionId}
+                    numberOfQuestions={numberOfQuestions}
+                    currentQuestion={currentQuestion}
+                    modifyQuestionId={modifyQuestionId}
+                    changeCurrentId={setCurrentQuestionId}
+                />
+            </Container>
+        </>
     );
 };
 export default Test;
