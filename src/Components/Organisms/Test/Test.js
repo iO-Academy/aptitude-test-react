@@ -16,13 +16,15 @@ const Test = () => {
         });
         return data.data;
     };
-    const updateUserAnswers = (currentQuestionId, userAnswer) => {
+
+    const updateUserAnswers = (userAnswer) => {
         if (userAnswer >= 1 && userAnswer <= 5 && validateTestLength(currentQuestionId)) {
             let currentAnswers = userAnswers;
             currentAnswers[currentQuestionId] = userAnswer;
             setUserAnswers(currentAnswers);
         }
     };
+
     const validateTestLength = (targetQuestionId) => {
         if (targetQuestionId > 0 && targetQuestionId <= numberOfQuestions) {
             return true;
@@ -48,6 +50,7 @@ const Test = () => {
         setNumberOfQuestions(data.data.length);
         modifyQuestionId(1);
     }, []);
+
     useEffect(async () => {
         findQuestion(currentQuestionId);
     }); //removed dependency to ensure render on first load
