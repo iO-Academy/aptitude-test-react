@@ -3,7 +3,7 @@ import Table from 'react-bootstrap/Table';
 import { useEffect, useState } from 'react';
 import AdminModal from '../Modal';
 import fetchApi from '../../../../Hooks/useFetch';
-import useJoin from '../../../../Hooks/useJoin';
+import './style.css';
 
 const TableAccordion = (props) => {
     // Set useState for results, show and questions
@@ -48,7 +48,7 @@ const TableAccordion = (props) => {
     return (
         <Accordion>
             <Accordion.Item eventKey="0">
-                <Accordion.Header>Extra info</Accordion.Header>
+                <Accordion.Header className="accordion">Extra info</Accordion.Header>
                 <Accordion.Body>
                     <Table>
                         <thead>
@@ -63,7 +63,7 @@ const TableAccordion = (props) => {
                         <tbody>
                             <tr>
                                 <td>{props.user.category_name}</td>
-                                <td>{props.user.test_id}</td>
+                                <td>{props.user.testName}</td>
                                 <td>{props.user.time}</td>
                                 <td>{props.user.showTimer}</td>
                                 <td>{props.user.score}</td>

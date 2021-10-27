@@ -1,3 +1,4 @@
+
 .perfect {
     color: #352556;
     background-color: #ac97de;
@@ -9,4 +10,12 @@
 .fail {
     color: #752121;
     background-color: #e38585;
+
+.tableHead {
+    color: #0F0028;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.tableBody {
+    font-family: 'Inter', sans-serif;
 }
