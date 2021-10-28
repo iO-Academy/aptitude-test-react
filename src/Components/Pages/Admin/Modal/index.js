@@ -4,6 +4,7 @@ import Table from 'react-bootstrap/Table';
 import { useEffect, useState } from 'react';
 import useJoin from '../../../../Hooks/useJoin';
 import getData from '../../../../Hooks/getData';
+import IOLogo from '../../../Atoms/ioLogo';
 
 // Create an AdminModal component
 const AdminModal = (props) => {
@@ -64,6 +65,7 @@ const AdminModal = (props) => {
                             <th scope="col">Question</th>
                             <th scope="col">Correct Answer</th>
                             <th scope="col">Applicant Answer</th>
+                            <th scope="col">Correct?</th>
                         </tr>
                     </thead>
                     {/* Map the questions and answers onto the modal table */}
@@ -74,6 +76,13 @@ const AdminModal = (props) => {
                                     <td>{answer.questionText}</td>
                                     <td>{answer.correctAnswer}</td>
                                     <td>{answer.applicantAnswer}</td>
+                                    <td>
+                                        {answer.correctAnswer === answer.applicantAnswer ? (
+                                            <IOLogo colour="green" width="50" height="50" />
+                                        ) : (
+                                            <IOLogo colour="red" width="50" height="50" />
+                                        )}
+                                    </td>
                                 </tr>
                             );
                         })}
