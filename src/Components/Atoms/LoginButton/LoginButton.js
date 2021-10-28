@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '../../../Hooks/useAuth';
+import './style.css';
 
 const LoginButton = () => {
     const [email, setEmail] = useState('');
@@ -20,7 +21,9 @@ const LoginButton = () => {
                     </div>
                 </>
             ) : (
-                <button onClick={() => auth.signout()}>Logout</button>
+                <button className="logoutBtn p-2" onClick={() => auth.signout()}>
+                    Logout
+                </button>
             )}
         </>
     );

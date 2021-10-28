@@ -1,22 +1,20 @@
 import { useEffect, useState } from 'react';
 import LoginButton from '../../Atoms/LoginButton/LoginButton';
 import fetchApi from '../../../Hooks/useFetch';
+import NewUserForm from './NewUserForm';
+import Search from './Search';
+import useJoin from '../../../Hooks/useJoin';
+import UserTable from './UserTable';
+import './style.css';
 
-// This component is an example of displaying data from an API and keeping the front end up to date with any changes
-// made to the data at the API in real time without needing to reload the page.
 const Admin = () => {
-    // initial state of all the users is null until it is populated by the API call
-    const [users, setUsers] = useState(null);
+    const [users, setUsers] = useState([]);
+    const [tests, setTests] = useState([]);
 
-    // the use effect hook is passed a 2nd param of [], ensuring it only runs once when the component is first mounted
-    useEffect(async () => {
-        // common error: the code calling the API is often placed directly in here - abstracting it into its own
-        // function (getUsers) is key to this pattern working
-        getUsers();
-    }, []);
-
-    // because it is abstracted here we have control when it occurs - once when component first mounted then whenever
-    // we choose from that point onwards, thus no infinite recalling.
+    /**
+     * Retrieves all users from db
+     * @returns {Promise<void>}
+     */
     const getUsers = async () => {
         let response = await fetchApi(`user`);
         if (response.success) {
@@ -24,14 +22,43 @@ const Admin = () => {
         }
     };
 
+    /**
+     * Retrieves all tests from db
+     * @returns {Promise<void>}
+     */
+    const getTest = async () => {
+        let response = await fetchApi(`test`);
+        if (response.success) {
+            return setTests(response.data);
+        }
+    };
+
+    useEffect(async () => {
+        getUsers();
+        getTest();
+    }, []);
+
+    useJoin([users, 'test_id', 'testName'], [tests, 'id', 'name']);
+
+    /**
+     * Handles the users' state update depending on search results returned
+     * @param searchResult
+     */
+    const searchChangeHandler = (searchResult) => {
+        // Check if there are meaningful results, otherwise update state with all users again
+        if (searchResult.length > 0) {
+            setUsers(searchResult);
+        } else {
+            getUsers();
+        }
+    };
+
     return (
         <>
             <LoginButton />
-            <p>Admin page</p>
-            {users &&
-                users.map((user) => {
-                    return <p key={user.id}>{user.name}</p>;
-                })}
+            <NewUserForm />
+            <Search users={users} onSearchChange={searchChangeHandler} />
+            <UserTable users={users} />
         </>
     );
 };
