@@ -3,7 +3,7 @@ import Table from 'react-bootstrap/Table';
 import { useEffect, useState } from 'react';
 import AdminModal from '../Modal';
 import './style.css';
-import getData from '../../../../Hooks/getData';
+import useGetData from '../../../../Hooks/useGetData';
 
 const TableAccordion = ({ user }) => {
     // Set useState for results, show and questions
@@ -15,7 +15,7 @@ const TableAccordion = ({ user }) => {
 
     // On mount async and await fetching results and questions from API
     useEffect(async () => {
-        setQuestions(await getData('question'));
+        setQuestions(await useGetData('question'));
     }, []);
     useEffect(() => {
         questions
@@ -45,13 +45,19 @@ const TableAccordion = ({ user }) => {
                             <tr>
                                 <td>{user.category_name}</td>
                                 <td>{user.testName}</td>
-                                <td>{user.testScore}</td>
+                                <td>
+                                    {user.testScore === '' && user.testLength === ''
+                                        ? 'N/A'
+                                        : user.testScore + '/' + user.testLength}
+                                </td>
                                 <td>{parseInt(user.time) / 60}</td>
                                 <td>{user.timeTaken}</td>
                                 <td>{user.showTimer === '1' ? 'yes' : 'no'}</td>
                                 <td>{user.testDate}</td>
                                 <td>
-                                    <button onClick={handleShow}>See answers</button>
+                                    <button className="btn adminButton" onClick={handleShow}>
+                                        See answers
+                                    </button>
                                     {adminModal}
                                 </td>
                             </tr>

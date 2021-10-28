@@ -3,7 +3,7 @@ import { Modal } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
 import { useEffect, useState } from 'react';
 import useJoin from '../../../../Hooks/useJoin';
-import getData from '../../../../Hooks/getData';
+import useGetData from '../../../../Hooks/useGetData';
 import IOLogo from '../../../Atoms/ioLogo';
 
 // Create an AdminModal component
@@ -22,8 +22,8 @@ const AdminModal = (props) => {
         });
     }
     useEffect(async () => {
-        let tempQuestions = await getData('question');
-        let tempAnswers = await getData('answer');
+        let tempQuestions = await useGetData('question');
+        let tempAnswers = await useGetData('answer');
         let questionsAnswerKey = useJoin([tempQuestions, 'id', 'answer'], [tempAnswers, 'id', 'answer']);
         setQuestions(
             questionsAnswerKey.map((question) => {
@@ -52,16 +52,13 @@ const AdminModal = (props) => {
     }, [questions]);
     return (
         <Modal size="xl" show={props.show} onHide={props.onHide}>
-            {/* Modal header with title */}
             <Modal.Header closeButton>
                 <Modal.Title>Answers</Modal.Title>
             </Modal.Header>
-            {/* Modal body */}
             <Modal.Body>
                 <Table className="table table-responsive" size="sm">
                     <thead>
                         <tr>
-                            {/* Headings for modal table */}
                             <th scope="col" className="col-sm-4">
                                 Question
                             </th>
@@ -76,7 +73,6 @@ const AdminModal = (props) => {
                             </th>
                         </tr>
                     </thead>
-                    {/* Map the questions and answers onto the modal table */}
                     <tbody>
                         {editedAnswers.map((answer) => {
                             return (
