@@ -1,4 +1,5 @@
 import './navButtonStyles.scss';
+import { Button, Col } from 'react-bootstrap';
 const NavButton = (props) => {
     const handleClick = () => {
         if (props.action === 'next') {
@@ -8,11 +9,15 @@ const NavButton = (props) => {
         }
     };
     return (
-        <>
-            <button onClick={handleClick} className={props.action === 'next' ? 'nextButton' : 'previousButton'}>
+        <Col className={props.action === 'next' ? 'text-end' : ''}>
+            <Button
+                onClick={handleClick}
+                variant="flat"
+                className={props.action === 'next' ? 'nextButton align-items-end' : 'previousButton'}
+            >
                 {props.action === 'next' ? 'next' : 'previous'}
-            </button>
-        </>
+            </Button>
+        </Col>
     );
 };
 
