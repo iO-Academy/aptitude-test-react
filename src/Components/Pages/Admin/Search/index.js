@@ -1,29 +1,17 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
-import fetchApi from '../../../../Hooks/useFetch';
+import { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Fuse from 'fuse.js';
+import fetchApi from '../../../../Hooks/useFetch';
 
-const Search = () => {
-    const [users, setUsers] = useState([]);
-    const [query, updateQuery] = useState('');
-
-    useEffect(async () => {
-        getUsers();
-    }, []);
-
-    const getUsers = async () => {
-        let response = await fetchApi(`user`);
-        if (response.success) {
-            return setUsers(response.data);
-        }
-    };
+const Search = (props) => {
+    const [query, setQuery] = useState('');
 
     /**
      * For info on fuse options see: https://fusejs.io/api/options.html
      * Threshold can have a value of 0-1, with 0 being an exact match (including case).
-     * includeScore outputs how close the match is (for debugging purposes), with 0 being a exact match.
+     * includeScore outputs how close the match is (for debugging purposes), with 0 being an exact match.
      * minMatchCharLength is the amount of chars required before fuse returns results.
      * Please feel free to tweak and add options.
      */
@@ -34,17 +22,19 @@ const Search = () => {
         minMatchCharLength: 2,
     };
 
-    const fuse = new Fuse(users, fuseoptions);
+    const fuse = new Fuse(props.users, fuseoptions);
 
-    const searchHandler = (event) => {
-        updateQuery(event.target.value);
-        // Currently outputting results to console, use the output to wire up the DOM.
-        const results = fuse.search(query);
-        console.log(results);
-    };
+    const results = fuse.search(query);
+    const searchResult = query ? results.map((user) => user.item) : {};
+
+    function searchHandler({ currentTarget }) {
+        setQuery(currentTarget.value);
+        props.onSearchChange(searchResult);
+    }
 
     const resetHandler = () => {
-        updateQuery('');
+        setQuery('');
+        props.onSearchChange({});
     };
 
     return (
@@ -53,6 +43,7 @@ const Search = () => {
                 type="search"
                 value={query}
                 onChange={searchHandler}
+                onReset={resetHandler}
                 placeholder="Search"
                 className="me-2"
                 aria-label="Search"
