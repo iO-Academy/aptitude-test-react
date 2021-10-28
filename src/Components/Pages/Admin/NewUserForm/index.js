@@ -118,7 +118,6 @@ const NewUserInput = () => {
             +document.querySelector('#seconds').value,
         );
         user['time'] = time;
-        console.log(user); // for debugging
         checkEmailAgainstDB(user.email, user);
     };
     /**
@@ -137,7 +136,7 @@ const NewUserInput = () => {
                             type="text"
                             name="name"
                             onChange={formChangeHandler}
-                            placeholder="Sophie Moore"
+                            placeholder="Ada Lovelace"
                             {...register('name', {
                                 required: true,
                                 pattern: /^[a-zA-Z\u00C0-\u00FF\- ]*$/,
@@ -157,7 +156,7 @@ const NewUserInput = () => {
                             type="text"
                             name="email"
                             onChange={formChangeHandler}
-                            placeholder="sophie.moore@io-academy.uk"
+                            placeholder="ada.lovelace@io-academy.uk"
                             {...register('email', {
                                 required: true,
                                 pattern:
