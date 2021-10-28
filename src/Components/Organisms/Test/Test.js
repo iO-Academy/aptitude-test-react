@@ -70,7 +70,17 @@ const Test = ({ finish }) => {
 
         if (postTheAnswers.success === true) {
             finish();
-            console.log(postTheAnswers);
+            let userToUpdate = {
+                email: user.user.email,
+                name: user.user.name,
+                canRetake: 0,
+                id: user.user.id,
+                test_id: user.user.test_id,
+            };
+            await fetchApi(`user/edit/${user.user.id}`, {
+                method: 'POST',
+                body: userToUpdate,
+            });
         } else {
             finish(true);
         }
