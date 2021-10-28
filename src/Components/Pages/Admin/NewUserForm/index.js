@@ -80,15 +80,15 @@ const NewUserInput = () => {
     };
 
     return (
-        <form onSubmit={addUserHandler}>
+        <form className="text-center" onSubmit={addUserHandler}>
             <div>
                 <input type="text" name="name" onChange={formChangeHandler} placeholder="Type new user's name" />
-            </div>
-            <div>
                 <input type="email" name="email" onChange={formChangeHandler} placeholder="Type new user's email" />
             </div>
             <div>
-                <label htmlFor="tests">Assign to test:</label>
+                <label htmlFor="tests" className="mx-2">
+                    Assign to test:
+                </label>
                 <select id="tests" name="test_id" defaultValue="default" onChange={formChangeHandler}>
                     <option value="default" disabled hidden>
                         Select...
@@ -103,9 +103,9 @@ const NewUserInput = () => {
                             );
                         })}
                 </select>
-            </div>
-            <div>
-                <label htmlFor="categories">Category:</label>
+                <label htmlFor="categories" className="mx-2">
+                    Category:
+                </label>
                 <select id="categories" name="category_id" defaultValue="default" onChange={formChangeHandler}>
                     <option value="default" disabled hidden>
                         Select...
@@ -126,9 +126,9 @@ const NewUserInput = () => {
                 <input type="number" id="minutes" name="minutes" max="60" />
                 <input type="number" id="seconds" name="seconds" min="0" max="60" />
             </div>
-            <div>
-                <button type="submit">Add User</button>
-            </div>
+            <button type="submit" className="adminButton p-2 my-2">
+                Add User
+            </button>
         </form>
     );
 };

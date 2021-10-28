@@ -21,9 +21,11 @@ const LoginButton = () => {
                     </div>
                 </>
             ) : (
-                <button className="logoutBtn p-2" onClick={() => auth.signout()}>
-                    Logout
-                </button>
+                <div className="text-center">
+                    <button className="my-2 adminButton p-2" onClick={() => auth.signout()}>
+                        Logout
+                    </button>
+                </div>
             )}
         </>
     );

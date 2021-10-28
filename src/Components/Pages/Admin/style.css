@@ -1,8 +1,18 @@
-.adminPage {
-    background-color: #743DFB26;
-}
-
 .adminh1 {
     color: #0F0028;
     font-family: 'Space Grotesk', sans-serif;
 }
+
+.adminButton {
+    background: #743DFB;
+    color: #E0E8F2;
+    font-family: 'JetBrains Mono';
+    border: hidden;
+    border-radius: 8px;
+}
+
+.adminButton:hover {
+    background-color: #0F0028;
+    color: #5FFFB4;
+}
+

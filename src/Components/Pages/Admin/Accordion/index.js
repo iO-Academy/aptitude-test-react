@@ -3,6 +3,16 @@ import Table from 'react-bootstrap/Table';
 import './style.css';
 
 const TableAccordion = (props) => {
+    const convertToMins = () => {
+        return (parseInt(props.user.time) / 60).toFixed(1) + 'm';
+    };
+    const displayShowTimer = () => {
+        if (parseInt(props.user.showTimer) === 1) {
+            return 'No';
+        }
+        return 'Yes';
+    };
+
     return (
         <Accordion>
             <Accordion.Item eventKey="0">
@@ -21,8 +31,8 @@ const TableAccordion = (props) => {
                             <tr>
                                 <td>{props.user.category_name}</td>
                                 <td>{props.user.testName}</td>
-                                <td>{props.user.time}</td>
-                                <td>{props.user.showTimer}</td>
+                                <td>{convertToMins()}</td>
+                                <td>{displayShowTimer()}</td>
                             </tr>
                         </tbody>
                     </Table>
