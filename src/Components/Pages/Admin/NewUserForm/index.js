@@ -85,9 +85,11 @@ const NewUserInput = () => {
         if (emails.includes(email)) {
             feedback.innerHTML =
                 'Email already registered. Please check if user already exists or provide alternative email.';
+            feedback.className = 'feedback-div alert alert-danger';
         } else {
             addUser(user);
             feedback.innerHTML = 'User successfully added.';
+            feedback.className = 'feedback-div alert alert-success';
             // Resets form upon successful submission
             reset();
         }
@@ -214,6 +216,7 @@ const NewUserInput = () => {
                 />
                 {errors.seconds && <p>Please enter a value between 0 and 59</p>}
             </div>
+            <FeedbackMessage />
             <div>
                 <button type="submit">Add User</button>
             </div>
@@ -230,7 +233,6 @@ const NewUserForm = () => {
         <div>
             <NewUserHeading />
             <NewUserInput />
-            <FeedbackMessage />
         </div>
     );
 };
