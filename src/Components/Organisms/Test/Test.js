@@ -4,7 +4,7 @@ import QuestionView from '../QuestionView/QuestionView';
 import { Container } from 'react-bootstrap';
 import { useAuth } from '../../../Hooks/useAuth';
 
-const Test = () => {
+const Test = ({ finish }) => {
     const [userAnswers, setUserAnswers] = useState({});
     const [questions, setQuestions] = useState([]);
     const [testAnswers, setTestAnswers] = useState([]);
@@ -54,6 +54,28 @@ const Test = () => {
         setTestAnswers(answers.data);
     };
 
+    const sendAnswers = async () => {
+        let answersToSend = {
+            uid: user.user.id,
+            answers: userAnswers,
+            score: 24,
+            testLength: numberOfQuestions,
+            time: '29.55',
+        };
+
+        let postTheAnswers = await fetchApi('answer', {
+            method: 'POST',
+            body: answersToSend,
+        });
+
+        if (postTheAnswers.success === true) {
+            finish();
+            console.log(postTheAnswers);
+        } else {
+            finish(true);
+        }
+    };
+
     useEffect(async () => {
         let userTestId = user.user.test_id;
         let data = await fetchApi(`/question?test_id=${userTestId}`);
@@ -78,6 +100,7 @@ const Test = () => {
                 changeCurrentId={setCurrentQuestionId}
                 userAnswers={userAnswers}
                 getAnswers={getAnswers}
+                sendAnswers={sendAnswers}
             />
         </Container>
     );
