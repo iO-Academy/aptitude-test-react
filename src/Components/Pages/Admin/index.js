@@ -55,7 +55,7 @@ const Admin = () => {
 
     return (
         <>
-            <NewUserForm />
+            {/*<NewUserForm />*/}
             <LoginButton />
             <Search users={users} onSearchChange={searchChangeHandler} />
             <UserTable users={users} />
