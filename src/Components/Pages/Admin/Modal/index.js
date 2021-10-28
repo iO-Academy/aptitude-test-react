@@ -44,7 +44,7 @@ const AdminModal = (props) => {
                     answer['applicantAnswer'] = filteredData2[0]['option' + answer.answerID];
                     return answer;
                 }
-                answer['applicantAnswer'] = '';
+                answer['applicantAnswer'] = null;
                 return answer;
             });
             setEditedAnswers(useJoin([optionAnswerArray, 'question', 'correctAnswer'], [questions, 'id', 'answer']));
@@ -65,7 +65,7 @@ const AdminModal = (props) => {
                             <th scope="col">Question</th>
                             <th scope="col">Correct Answer</th>
                             <th scope="col">Applicant Answer</th>
-                            <th scope="col">Correct?</th>
+                            <th scope="col-">Correct?</th>
                         </tr>
                     </thead>
                     {/* Map the questions and answers onto the modal table */}
@@ -75,12 +75,16 @@ const AdminModal = (props) => {
                                 <tr key={answer.id}>
                                     <td>{answer.questionText}</td>
                                     <td>{answer.correctAnswer}</td>
-                                    <td>{answer.applicantAnswer}</td>
+                                    <td>{answer.applicantAnswer ? answer.applicantAnswer : 'N/A'}</td>
                                     <td>
-                                        {answer.correctAnswer === answer.applicantAnswer ? (
-                                            <IOLogo colour="green" width="50" height="50" />
+                                        {answer.applicantAnswer ? (
+                                            answer.correctAnswer === answer.applicantAnswer ? (
+                                                <IOLogo colour="green" width="50" height="50" />
+                                            ) : (
+                                                <IOLogo colour="red" width="50" height="50" />
+                                            )
                                         ) : (
-                                            <IOLogo colour="red" width="50" height="50" />
+                                            <IOLogo colour="black" width="50" height="50" />
                                         )}
                                     </td>
                                 </tr>
