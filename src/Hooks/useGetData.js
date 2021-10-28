@@ -2,11 +2,16 @@
 // we choose from that point onwards, thus no infinite recalling.
 import fetchApi from './useFetch';
 
-const getData = async (url) => {
+/**
+ *  This hook is used to async and await the fetchApi component
+ * @param url
+ * @returns {Promise<*>}
+ */
+const useGetData = async (url) => {
     let response = await fetchApi(url);
     if (response.success) {
         return response.data;
     }
 };
 
-export default getData;
+export default useGetData;

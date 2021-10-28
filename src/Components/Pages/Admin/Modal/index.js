@@ -3,7 +3,7 @@ import { Modal } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
 import { useEffect, useState } from 'react';
 import useJoin from '../../../../Hooks/useJoin';
-import getData from '../../../../Hooks/getData';
+import useGetData from '../../../../Hooks/useGetData';
 import IOLogo from '../../../Atoms/ioLogo';
 
 // Create an AdminModal component
@@ -22,8 +22,8 @@ const AdminModal = (props) => {
         });
     }
     useEffect(async () => {
-        let tempQuestions = await getData('question');
-        let tempAnswers = await getData('answer');
+        let tempQuestions = await useGetData('question');
+        let tempAnswers = await useGetData('answer');
         let questionsAnswerKey = useJoin([tempQuestions, 'id', 'answer'], [tempAnswers, 'id', 'answer']);
         setQuestions(
             questionsAnswerKey.map((question) => {

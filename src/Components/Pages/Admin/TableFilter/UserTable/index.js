@@ -1,10 +1,10 @@
 import Table from 'react-bootstrap/Table';
-import TableAccordion from '../Accordion';
+import TableAccordion from '../../Accordion';
 import './style.css';
 import React from 'react';
 import { useEffect, useState } from 'react';
-import getData from '../../../../Hooks/getData';
-import useJoin from '../../../../Hooks/useJoin';
+import useGetData from '../../../../../Hooks/useGetData';
+import useJoin from '../../../../../Hooks/useJoin';
 
 const UserTable = ({ users }) => {
     //initial state of the tests is null until tests is populated
@@ -14,7 +14,7 @@ const UserTable = ({ users }) => {
     useEffect(async () => {
         // common error: the code calling the API is often placed directly in here - abstracting it into its own
         // function (getUsers) is key to this pattern working
-        await setResults(await getData('result'));
+        await setResults(await useGetData('result'));
     }, []);
     const calcPercentage = (id) => {
         if (results) {
@@ -35,7 +35,7 @@ const UserTable = ({ users }) => {
             return 'perfect';
         } else if (percentage >= 70) {
             return 'pass';
-        } else percentage >= 0;
+        }
         return 'fail';
     };
     useEffect(() => {
