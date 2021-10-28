@@ -11,18 +11,28 @@ const TableAccordion = ({ user }) => {
                     <Table>
                         <thead>
                             <tr>
-                                <th>user category</th>
-                                <th>test allocated</th>
-                                <th>time allowed(m)</th>
-                                <th>timer hidden</th>
+                                <th>User category</th>
+                                <th>Test allocated</th>
+                                <th>Score</th>
+                                <th>Time allowed(m)</th>
+                                <th>Time taken(m)</th>
+                                <th>Timer hidden</th>
+                                <th>Date</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>{user.category_name}</td>
                                 <td>{user.testName}</td>
+                                <td>
+                                    {user.testScore === '' && user.testLength === ''
+                                        ? 'N/A'
+                                        : user.testScore + '/' + user.testLength}
+                                </td>
                                 <td>{parseInt(user.time) / 60}</td>
+                                <td>{user.timeTaken}</td>
                                 <td>{user.showTimer === '1' ? 'yes' : 'no'}</td>
+                                <td>{user.testDate}</td>
                             </tr>
                         </tbody>
                     </Table>
