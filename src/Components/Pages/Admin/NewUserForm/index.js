@@ -6,8 +6,8 @@ import './NewUserForm.scss';
 
 const NewUserHeading = () => {
     return (
-        <div className="container-fluid ms-auto">
-            <h2>Add new user</h2>
+        <div className="ms-auto">
+            <h1>Add new user</h1>
         </div>
     );
 };
@@ -125,7 +125,7 @@ const NewUserInput = () => {
      * Form output for display on page (including front-end validation (...register) and content for dropdown menus).
      */
     return (
-        <form onSubmit={handleSubmit(addUserHandler)} className="container-fluid row">
+        <form onSubmit={handleSubmit(addUserHandler)} className="row">
             <div className="row gy-4">
                 <div className="col-lg-6 form-group row me-auto">
                     <label className="col-form-label col-lg-1" htmlFor="name">
@@ -279,7 +279,7 @@ const FeedbackMessage = () => {
 
 const NewUserForm = () => {
     return (
-        <div className="container-fluid">
+        <div>
             <NewUserHeading />
             <NewUserInput />
         </div>
