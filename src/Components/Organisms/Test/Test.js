@@ -4,7 +4,7 @@ import QuestionView from '../QuestionView/QuestionView';
 import { Container } from 'react-bootstrap';
 import { useAuth } from '../../../Hooks/useAuth';
 
-const Test = () => {
+const Test = ({ finish }) => {
     const [userAnswers, setUserAnswers] = useState({});
     const [questions, setQuestions] = useState([]);
     const [testAnswers, setTestAnswers] = useState([]);
@@ -68,7 +68,12 @@ const Test = () => {
             body: answersToSend,
         });
 
-        console.log(postTheAnswers);
+        if (postTheAnswers.success === true) {
+            finish();
+            console.log(postTheAnswers);
+        } else {
+            finish(true);
+        }
     };
 
     useEffect(async () => {
