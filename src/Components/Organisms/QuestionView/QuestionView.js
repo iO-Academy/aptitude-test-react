@@ -11,6 +11,8 @@ const QuestionView = ({
     modifyQuestionId,
     updateUserAnswers,
     numberOfQuestions,
+    getAnswers,
+    sendAnswers,
 }) => {
     return (
         <Container>
@@ -37,6 +39,9 @@ const QuestionView = ({
                         changeCurrentId={changeCurrentId}
                         modifyQuestionId={modifyQuestionId}
                     />
+                )}
+                {currentQuestionId === numberOfQuestions && (
+                    <NavButton action="finish" getAnswers={getAnswers} sendAnswers={sendAnswers} />
                 )}
             </Row>
         </Container>
