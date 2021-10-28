@@ -35,7 +35,9 @@ const Login = () => {
                             <div>
                                 <p>-WARNING-</p>
                                 <p>Please do not refresh or move away from the page while you are taking the test.</p>
-                                <p>If you dont stay on the page, the test will end and your score will be set to 0.</p>
+                                <p>
+                                    If you do not stay on the page, the test will end and your score will be set to 0.
+                                </p>
                             </div>
                             <LoginButton />
                         </main>

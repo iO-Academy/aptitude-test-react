@@ -73,6 +73,20 @@ const Test = ({ finish }) => {
         return score;
     };
 
+    const userNoRetake = async () => {
+        let userToUpdate = {
+            email: user.user.email,
+            name: user.user.name,
+            canRetake: 0,
+            id: user.user.id,
+            test_id: user.user.test_id,
+        };
+        await fetchApi(`user/edit`, {
+            method: 'POST',
+            body: userToUpdate,
+        });
+    };
+
     const sendAnswers = async (score) => {
         let answersToSend = {
             uid: user.user.id,
@@ -89,6 +103,7 @@ const Test = ({ finish }) => {
 
         if (postTheAnswers.success === true) {
             finish();
+            userNoRetake();
         } else {
             finish(true);
         }
