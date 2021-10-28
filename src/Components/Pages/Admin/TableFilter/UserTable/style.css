@@ -3,11 +3,11 @@
 }
 
 .pass {
-    background-color: #baffa6;
+    background-color: #baffa6 !important;
 }
 
 .fail {
-    background-color: #e38585;
+    background-color: #e38585 !important;
 }
 
 
