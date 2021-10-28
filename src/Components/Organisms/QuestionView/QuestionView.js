@@ -11,6 +11,7 @@ const QuestionView = ({
     modifyQuestionId,
     updateUserAnswers,
     numberOfQuestions,
+    getAnswers,
 }) => {
     return (
         <Container>
@@ -33,6 +34,15 @@ const QuestionView = ({
                 {currentQuestionId !== numberOfQuestions && (
                     <NavButton
                         action="next"
+                        currentQuestionId={currentQuestionId}
+                        changeCurrentId={changeCurrentId}
+                        modifyQuestionId={modifyQuestionId}
+                    />
+                )}
+                {currentQuestionId === numberOfQuestions && (
+                    <NavButton
+                        action="finish"
+                        getAnswers={getAnswers}
                         currentQuestionId={currentQuestionId}
                         changeCurrentId={changeCurrentId}
                         modifyQuestionId={modifyQuestionId}
