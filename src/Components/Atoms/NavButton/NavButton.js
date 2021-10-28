@@ -8,14 +8,19 @@ const NavButton = ({ action, changeCurrentId, currentQuestionId, modifyQuestionI
             modifyQuestionId(changeCurrentId(currentQuestionId - 1));
         }
     };
+    const createButtonText = (action) => {
+        if (action === 'next') {
+            return 'Next';
+        } else if (action === 'previous') {
+            return 'Previous';
+        } else if (action === 'finish') {
+            return 'Finish';
+        }
+    };
     return (
-        <Col className={action === 'next' ? 'text-end' : ''}>
-            <Button
-                onClick={handleClick}
-                variant="flat"
-                className={action === 'next' ? 'nextButton align-items-end' : 'previousButton'}
-            >
-                {action === 'next' ? 'next' : 'previous'}
+        <Col className={action !== 'previous' ? 'text-end' : ''}>
+            <Button onClick={handleClick} variant="flat" className={action === 'finish' ? 'finishButton' : ''}>
+                {createButtonText(action)}
             </Button>
         </Col>
     );

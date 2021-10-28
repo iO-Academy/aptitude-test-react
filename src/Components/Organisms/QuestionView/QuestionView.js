@@ -38,6 +38,14 @@ const QuestionView = ({
                         modifyQuestionId={modifyQuestionId}
                     />
                 )}
+                {currentQuestionId === numberOfQuestions && (
+                    <NavButton
+                        action="finish"
+                        currentQuestionId={currentQuestionId}
+                        changeCurrentId={changeCurrentId}
+                        modifyQuestionId={modifyQuestionId}
+                    />
+                )}
             </Row>
         </Container>
     );
