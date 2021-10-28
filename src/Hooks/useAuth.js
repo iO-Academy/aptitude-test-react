@@ -21,7 +21,9 @@ function useProvideAuth() {
         if (url === '') return;
         let response = await fetchApi(`user?email=${url}`);
         if (response.success) {
-            return setUser(response.data);
+            if (response.data.canRetake === '1' || response.data.isAdmin === '1') {
+                return setUser(response.data);
+            }
         }
     };
 

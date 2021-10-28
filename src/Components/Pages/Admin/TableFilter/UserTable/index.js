@@ -38,7 +38,6 @@ const UserTable = ({ users }) => {
         }
         return 'fail';
     };
-
     useEffect(() => {
         if (results) {
             let resultsDate = useJoin([users, 'id', 'testDate'], [results, 'id', 'dateCreated']).map((user) => {
@@ -48,9 +47,11 @@ const UserTable = ({ users }) => {
                 return user;
             });
             let resultsScore = useJoin([resultsDate, 'id', 'testScore'], [results, 'id', 'score']);
-            setEditedUsers(useJoin([resultsScore, 'id', 'timeTaken'], [results, 'id', 'time']));
+            let resultsAnswers = useJoin([resultsScore, 'id', 'answers'], [results, 'id', 'answers']);
+            setEditedUsers(useJoin([resultsAnswers, 'id', 'timeTaken'], [results, 'id', 'time']));
         }
     }, [results, users]);
+
     return (
         <Table className="table table-borderless mx-auto">
             <thead className="tableHead table-light">
