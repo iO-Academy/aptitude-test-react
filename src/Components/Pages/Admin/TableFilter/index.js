@@ -4,14 +4,10 @@ import UserTable from '../UserTable';
 import { useEffect, useState } from 'react';
 
 const TableFilter = (props) => {
-    //initial state of filtered users is props.users
     const [filteredUsers, setFilteredUsers] = useState(props.users);
-    //initial state of userTable is null
     const [userTable, setUserTable] = useState('null');
     const [filterToggleName, setFilterToggleName] = useState('Category');
     let filteredUsersArray = [];
-
-    //When the state of filteredUsers changes update the users prop within the UserTable to contain the new filteredUsers
     useEffect(() => {
         filteredUsers ? setUserTable(<UserTable users={filteredUsers} />) : '';
     }, [filteredUsers]);

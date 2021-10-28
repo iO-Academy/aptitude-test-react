@@ -15,7 +15,7 @@ const Admin = () => {
     const [results, setResults] = useState(null);
     //initial state of the table is null until users is populated
     const [tableFilter, setTableFilter] = useState(null);
-    const [categories, setCategories] = useState('null');
+    const [categories, setCategories] = useState(null);
     // the use effect hook is passed a 2nd param of [], ensuring it only runs once when the component is first mounted
     useEffect(async () => {
         // common error: the code calling the API is often placed directly in here - abstracting it into its own
@@ -35,7 +35,7 @@ const Admin = () => {
     }, [users, tests, results]);
 
     useEffect(() => {
-        editedUsers && categories !== 'null'
+        editedUsers && categories !== null
             ? setTableFilter(<TableFilter users={editedUsers} categories={categories} />)
             : '';
     }, [editedUsers, categories]);
