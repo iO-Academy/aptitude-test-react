@@ -1,16 +1,6 @@
 import './navButtonStyles.scss';
 import { Button, Col } from 'react-bootstrap';
-const NavButton = ({
-    action,
-    changeCurrentId,
-    currentQuestionId,
-    modifyQuestionId,
-    getAnswers,
-    calculateScore,
-    userAnswers,
-    testAnswers,
-    sendAnswers,
-}) => {
+const NavButton = ({ action, changeCurrentId, currentQuestionId, modifyQuestionId, getAnswers }) => {
     const handleClick = () => {
         if (action === 'next') {
             modifyQuestionId(changeCurrentId(currentQuestionId + 1));
