@@ -133,9 +133,6 @@ const Test = ({ finish }) => {
                 changeCurrentId={setCurrentQuestionId}
                 userAnswers={userAnswers}
                 getAnswers={getAnswers}
-                calculateScore={calculateScore}
-                testAnswers={testAnswers}
-                sendAnswers={sendAnswers}
             />
         </Container>
     );
