@@ -1,36 +1,58 @@
 import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownItems from './DropdownItems';
-import { useEffect, useState } from 'react';
-import useGetData from '../../../../Hooks/useGetData';
 import './style.css';
 import UserTable from '../UserTable';
+import { useEffect, useState } from 'react';
 
 const TableFilter = (props) => {
-    const [categories, setCategories] = useState('null');
-    const [dropdownItems, setDropdownItems] = useState(null);
-    const [tableFilter, setTableFilter] = useState(null);
+    //initial state of filtered users is props.users
+    const [filteredUsers, setFilteredUsers] = useState(props.users);
+    //initial state of userTable is null
+    const [userTable, setUserTable] = useState('null');
+    const [filterToggleName, setFilterToggleName] = useState('Category');
+    let filteredUsersArray = [];
 
-    useEffect(async () => {
-        await setCategories(await useGetData('category'));
-    }, []);
-
+    //When the state of filteredUsers changes update the users prop within the UserTable to contain the new filteredUsers
     useEffect(() => {
-        categories ? setDropdownItems(<DropdownItems categories={categories} />) : '';
-    }, [categories]);
+        filteredUsers ? setUserTable(<UserTable users={filteredUsers} />) : '';
+    }, [filteredUsers]);
 
     return (
         <div>
             <h5>Filter Results</h5>
             <Dropdown className="my-3">
                 <Dropdown.Toggle className="btn dropdown-toggle" type="button">
-                    Category
+                    {filterToggleName}
                 </Dropdown.Toggle>
                 <Dropdown.Menu className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    {dropdownItems}
-                    <Dropdown.Item>None</Dropdown.Item>
+                    {props.categories.map((category) => {
+                        return (
+                            <Dropdown.Item
+                                key={category.id}
+                                href="#"
+                                onClick={() => {
+                                    setFilterToggleName(category.name);
+                                    props.users.map((user) => {
+                                        return user.category_name === category.name
+                                            ? filteredUsersArray.push(user)
+                                            : '';
+                                    });
+                                    return setFilteredUsers(filteredUsersArray);
+                                }}
+                            >
+                                {category.name}
+                            </Dropdown.Item>
+                        );
+                    })}
+                    <Dropdown.Item
+                        onClick={() => {
+                            setFilteredUsers(props.users);
+                        }}
+                    >
+                        None
+                    </Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>
-            <UserTable users={props.users} />
+            {userTable}
         </div>
     );
 };
