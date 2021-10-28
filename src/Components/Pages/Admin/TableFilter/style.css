@@ -1,0 +1,19 @@
+.dropdown-toggle:hover,
+.dropdown-toggle:focus.btn:focus{
+    background-color: #0F0028;
+    color: #5FFFB4;
+    box-shadow: none;
+}
+
+.dropdown-toggle {
+    border: none;
+    font-family: 'JetBrains Mono';
+}
+
+.dropdown-menu,
+.dropdown-toggle {
+    background-color: #5FFFB4;
+    color: #0F0028;
+    border: 1px solid #0F0028;
+}
+
