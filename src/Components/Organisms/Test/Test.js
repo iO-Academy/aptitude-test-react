@@ -77,7 +77,7 @@ const Test = ({ finish }) => {
                 id: user.user.id,
                 test_id: user.user.test_id,
             };
-            await fetchApi(`user/edit/${user.user.id}`, {
+            await fetchApi(`user/edit`, {
                 method: 'POST',
                 body: userToUpdate,
             });
