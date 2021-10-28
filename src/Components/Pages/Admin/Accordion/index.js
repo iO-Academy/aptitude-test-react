@@ -1,7 +1,7 @@
 import Accordion from 'react-bootstrap/Accordion';
 import Table from 'react-bootstrap/Table';
 import { useEffect, useState } from 'react';
-import AdminModal from '../Modal';
+import AdminModal from '../AdminModal';
 import './style.css';
 import useGetData from '../../../../Hooks/useGetData';
 
