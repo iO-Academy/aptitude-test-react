@@ -58,14 +58,22 @@ const AdminModal = (props) => {
             </Modal.Header>
             {/* Modal body */}
             <Modal.Body>
-                <Table className="table mx-auto">
+                <Table className="table table-responsive" size="sm">
                     <thead>
                         <tr>
                             {/* Headings for modal table */}
-                            <th scope="col">Question</th>
-                            <th scope="col">Correct Answer</th>
-                            <th scope="col">Applicant Answer</th>
-                            <th scope="col-">Correct?</th>
+                            <th scope="col" className="col-sm-4">
+                                Question
+                            </th>
+                            <th scope="col" className="col-sm-2 text-center">
+                                Correct Answer
+                            </th>
+                            <th scope="col" className="col-sm-2 text-center">
+                                Applicant Answer
+                            </th>
+                            <th scope="col" className="col-sm-1 text-center">
+                                Correct?
+                            </th>
                         </tr>
                     </thead>
                     {/* Map the questions and answers onto the modal table */}
@@ -74,9 +82,11 @@ const AdminModal = (props) => {
                             return (
                                 <tr key={answer.id}>
                                     <td>{answer.questionText}</td>
-                                    <td>{answer.correctAnswer}</td>
-                                    <td>{answer.applicantAnswer ? answer.applicantAnswer : 'N/A'}</td>
-                                    <td>
+                                    <td className="text-center">{answer.correctAnswer}</td>
+                                    <td className={'text-center ' + (answer.isCorrect ? 'pass' : 'fail')}>
+                                        {answer.applicantAnswer ? answer.applicantAnswer : 'N/A'}
+                                    </td>
+                                    <td className="text-center align-middle">
                                         {answer.applicantAnswer ? (
                                             answer.correctAnswer === answer.applicantAnswer ? (
                                                 <IOLogo colour="green" width="50" height="50" />
