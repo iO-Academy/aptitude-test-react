@@ -51,7 +51,9 @@ const TableAccordion = ({ user }) => {
                                 <td>{user.showTimer === '1' ? 'yes' : 'no'}</td>
                                 <td>{user.testDate}</td>
                                 <td>
-                                    <button onClick={handleShow}>See answers</button>
+                                    <button className="btn adminButton" onClick={handleShow}>
+                                        See answers
+                                    </button>
                                     {adminModal}
                                 </td>
                             </tr>
