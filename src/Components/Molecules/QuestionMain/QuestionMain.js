@@ -6,7 +6,7 @@ const QuestionMain = (props) => {
     const [val, setVal] = useState(0);
 
     useEffect(() => {
-        props.updateUserAnswers(val);
+        props.updateUserAnswers(props.currentQuestion.id, val);
     }, [val]);
 
     useEffect(() => {

@@ -17,10 +17,10 @@ const Test = () => {
         return data.data;
     };
 
-    const updateUserAnswers = (userAnswer) => {
+    const updateUserAnswers = (qid, userAnswer) => {
         if (userAnswer >= 1 && userAnswer <= 5 && validateTestLength(currentQuestionId)) {
             let currentAnswers = userAnswers;
-            currentAnswers[currentQuestionId] = userAnswer;
+            currentAnswers[qid] = userAnswer;
             setUserAnswers(currentAnswers);
         }
     };
