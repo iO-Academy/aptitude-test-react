@@ -83,7 +83,12 @@ const AdminModal = (props) => {
                                 <tr key={answer.id}>
                                     <td>{answer.questionText}</td>
                                     <td className="text-center">{answer.correctAnswer}</td>
-                                    <td className={'text-center ' + (answer.isCorrect ? 'pass' : 'fail')}>
+                                    <td
+                                        className={
+                                            'text-center ' +
+                                            (answer.applicantAnswer ? (answer.isCorrect ? 'pass' : 'fail') : '')
+                                        }
+                                    >
                                         {answer.applicantAnswer ? answer.applicantAnswer : 'N/A'}
                                     </td>
                                     <td className="text-center align-middle">
