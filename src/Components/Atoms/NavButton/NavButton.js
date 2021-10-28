@@ -1,6 +1,6 @@
 import './navButtonStyles.scss';
 import { Button, Col } from 'react-bootstrap';
-const NavButton = ({ action, changeCurrentId, currentQuestionId, modifyQuestionId, getAnswers }) => {
+const NavButton = ({ action, changeCurrentId, currentQuestionId, modifyQuestionId, getAnswers, sendAnswers }) => {
     const handleClick = () => {
         if (action === 'next') {
             modifyQuestionId(changeCurrentId(currentQuestionId + 1));
@@ -8,6 +8,7 @@ const NavButton = ({ action, changeCurrentId, currentQuestionId, modifyQuestionI
             modifyQuestionId(changeCurrentId(currentQuestionId - 1));
         } else if (action === 'finish') {
             getAnswers();
+            sendAnswers();
         }
     };
     const createButtonText = (action) => {
