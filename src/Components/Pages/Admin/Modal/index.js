@@ -52,23 +52,19 @@ const AdminModal = (props) => {
     }, [questions]);
     return (
         <Modal size="xl" show={props.show} onHide={props.onHide}>
-            {/* Modal header with title */}
             <Modal.Header closeButton>
                 <Modal.Title>Answers</Modal.Title>
             </Modal.Header>
-            {/* Modal body */}
             <Modal.Body>
                 <Table className="table mx-auto">
                     <thead>
                         <tr>
-                            {/* Headings for modal table */}
                             <th scope="col">Question</th>
                             <th scope="col">Correct Answer</th>
                             <th scope="col">Applicant Answer</th>
                             <th scope="col-">Correct?</th>
                         </tr>
                     </thead>
-                    {/* Map the questions and answers onto the modal table */}
                     <tbody>
                         {editedAnswers.map((answer) => {
                             return (
