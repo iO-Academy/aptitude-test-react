@@ -8,6 +8,7 @@ const TableFilter = ({ users, categories }) => {
     const [userTable, setUserTable] = useState('null');
     const [filterToggleName, setFilterToggleName] = useState('Category');
     let filteredUsersArray = [];
+
     useEffect(() => {
         filteredUsers ? setUserTable(<UserTable users={filteredUsers} />) : '';
     }, [filteredUsers]);
