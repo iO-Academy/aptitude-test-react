@@ -1,10 +1,10 @@
 import Dropdown from 'react-bootstrap/Dropdown';
 import './style.css';
-import UserTable from '../UserTable';
+import UserTable from './UserTable';
 import { useEffect, useState } from 'react';
 
-const TableFilter = (props) => {
-    const [filteredUsers, setFilteredUsers] = useState(props.users);
+const TableFilter = ({ users, categories }) => {
+    const [filteredUsers, setFilteredUsers] = useState(users);
     const [userTable, setUserTable] = useState('null');
     const [filterToggleName, setFilterToggleName] = useState('Category');
     let filteredUsersArray = [];
@@ -20,14 +20,14 @@ const TableFilter = (props) => {
                     {filterToggleName}
                 </Dropdown.Toggle>
                 <Dropdown.Menu className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    {props.categories.map((category) => {
+                    {categories.map((category) => {
                         return (
                             <Dropdown.Item
                                 key={category.id}
                                 href="#"
                                 onClick={() => {
                                     setFilterToggleName(category.name);
-                                    props.users.map((user) => {
+                                    users.map((user) => {
                                         return user.category_name === category.name
                                             ? filteredUsersArray.push(user)
                                             : '';
@@ -41,7 +41,8 @@ const TableFilter = (props) => {
                     })}
                     <Dropdown.Item
                         onClick={() => {
-                            setFilteredUsers(props.users);
+                            setFilterToggleName('None');
+                            setFilteredUsers(users);
                         }}
                     >
                         None
