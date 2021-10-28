@@ -53,12 +53,45 @@ const Test = ({ finish }) => {
         let answers = await fetchApi(`/answer?test_id=${userTestId}`);
         setTestAnswers(answers.data);
     };
+    useEffect(() => {
+        if (testAnswers.length) {
+            let score = calculateScore(userAnswers, testAnswers);
+            sendAnswers(score);
+        }
+    }, [testAnswers]);
 
-    const sendAnswers = async () => {
+    const calculateScore = (userAnswers, testAnswers) => {
+        let score = 0;
+        let answersWeNeed = testAnswers.filter((testAnswer) => {
+            return testAnswer.id in userAnswers;
+        });
+        answersWeNeed.forEach((testAnswer) => {
+            if (userAnswers[testAnswer.id] == testAnswer.answer) {
+                score++;
+            }
+        });
+        return score;
+    };
+
+    const userNoRetake = async () => {
+        let userToUpdate = {
+            email: user.user.email,
+            name: user.user.name,
+            canRetake: 0,
+            id: user.user.id,
+            test_id: user.user.test_id,
+        };
+        await fetchApi(`user/edit`, {
+            method: 'POST',
+            body: userToUpdate,
+        });
+    };
+
+    const sendAnswers = async (score) => {
         let answersToSend = {
             uid: user.user.id,
             answers: userAnswers,
-            score: 24,
+            score: score,
             testLength: numberOfQuestions,
             time: '29.55',
         };
@@ -70,17 +103,7 @@ const Test = ({ finish }) => {
 
         if (postTheAnswers.success === true) {
             finish();
-            let userToUpdate = {
-                email: user.user.email,
-                name: user.user.name,
-                canRetake: 0,
-                id: user.user.id,
-                test_id: user.user.test_id,
-            };
-            await fetchApi(`user/edit`, {
-                method: 'POST',
-                body: userToUpdate,
-            });
+            userNoRetake();
         } else {
             finish(true);
         }
@@ -110,6 +133,8 @@ const Test = ({ finish }) => {
                 changeCurrentId={setCurrentQuestionId}
                 userAnswers={userAnswers}
                 getAnswers={getAnswers}
+                calculateScore={calculateScore}
+                testAnswers={testAnswers}
                 sendAnswers={sendAnswers}
             />
         </Container>

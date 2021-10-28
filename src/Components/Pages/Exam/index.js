@@ -14,7 +14,7 @@ const Exam = () => {
     };
 
     return (
-        <Container className="text-center mt-3">
+        <Container>
             {finished && <CompletedTest error={error} />}
             {!finished && <Test finish={finishTest} />}
         </Container>
