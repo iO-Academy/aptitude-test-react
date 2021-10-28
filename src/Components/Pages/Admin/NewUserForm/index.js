@@ -170,10 +170,10 @@ const NewUserInput = () => {
             </div>
             <div className="row gy-4">
                 <div className="col-lg-4 form-group row me-auto">
-                    <label className="col-form-label col-lg-6" htmlFor="tests">
+                    <label className="col-form-label col-lg-4" htmlFor="tests">
                         Assign to test:
                     </label>
-                    <div className="col-lg-6">
+                    <div className="col-lg-8">
                         <select
                             className="form-select"
                             id="tests"
@@ -199,10 +199,10 @@ const NewUserInput = () => {
                     {errors.tests && <p>Please select a test</p>}
                 </div>
                 <div className="col-lg-4 form-group row">
-                    <label className="col-form-label col-lg-6" htmlFor="categories">
+                    <label className="col-form-label col-lg-3" htmlFor="categories">
                         Category:
                     </label>
-                    <div className="col-lg-6">
+                    <div className="col-lg-9">
                         <select
                             className="form-select"
                             id="categories"
@@ -264,7 +264,7 @@ const NewUserInput = () => {
             <div className="row gy-2">
                 <FeedbackMessage />
                 <div className="col-lg-2">
-                    <button className="float-end" type="submit">
+                    <button className="float-end logoutBtn p-2" type="submit">
                         Add User
                     </button>
                 </div>

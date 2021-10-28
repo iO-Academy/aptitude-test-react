@@ -1,8 +1,12 @@
 .adminPage {
-    background-color: #743DFB26;
+    background-color: #743dfb26;
 }
 
 h1 {
-    color: #0F0028;
+    color: #0f0028;
     font-family: 'Space Grotesk', sans-serif;
+}
+
+.logoutBtn:hover {
+    background-color: #0f0028;
 }
