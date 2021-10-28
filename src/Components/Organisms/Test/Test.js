@@ -62,13 +62,14 @@ const Test = ({ finish }) => {
 
     const calculateScore = (userAnswers, testAnswers) => {
         let score = 0;
-        for (let i = 0; i < testAnswers.length; i++) {
-            if (userAnswers.hasOwnProperty(i + 1)) {
-                if (userAnswers[i + 1] === testAnswers[i].answer) {
-                    score++;
-                }
+        let answersWeNeed = testAnswers.filter((testAnswer) => {
+            return testAnswer.id in userAnswers;
+        });
+        answersWeNeed.forEach((testAnswer) => {
+            if (userAnswers[testAnswer.id] == testAnswer.answer) {
+                score++;
             }
-        }
+        });
         return score;
     };
 

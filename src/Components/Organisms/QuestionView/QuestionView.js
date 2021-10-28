@@ -50,6 +50,9 @@ const QuestionView = ({
                         userAnswers={userAnswers}
                         testAnswers={testAnswers}
                         sendAnswers={sendAnswers}
+                        currentQuestionId={currentQuestionId}
+                        changeCurrentId={changeCurrentId}
+                        modifyQuestionId={modifyQuestionId}
                     />
                 )}
             </Row>
