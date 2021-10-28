@@ -7,6 +7,7 @@ import { useAuth } from '../../../Hooks/useAuth';
 const Test = () => {
     const [userAnswers, setUserAnswers] = useState({});
     const [questions, setQuestions] = useState([]);
+    const [testAnswers, setTestAnswers] = useState([]);
     const [currentQuestionId, setCurrentQuestionId] = useState(1);
     const [currentQuestion, setCurrentQuestion] = useState({});
     const [numberOfQuestions, setNumberOfQuestions] = useState(0);
@@ -46,6 +47,13 @@ const Test = () => {
             setCurrentQuestionId(targetQuestionId);
         }
     };
+
+    const getAnswers = async () => {
+        let userTestId = user.user.test_id;
+        let answers = await fetchApi(`/answer?test_id=${userTestId}`);
+        setTestAnswers(answers.data);
+    };
+
     useEffect(async () => {
         let userTestId = user.user.test_id;
         let data = await fetchApi(`/question?test_id=${userTestId}`);
@@ -69,6 +77,7 @@ const Test = () => {
                 updateUserAnswers={updateUserAnswers}
                 changeCurrentId={setCurrentQuestionId}
                 userAnswers={userAnswers}
+                getAnswers={getAnswers}
             />
         </Container>
     );
