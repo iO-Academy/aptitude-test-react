@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import fetchApi from '../../../Hooks/useFetch';
 import QuestionView from '../QuestionView/QuestionView';
 import { Container } from 'react-bootstrap';
+import { useAuth } from '../../../Hooks/useAuth';
 
 const Test = () => {
     const [userAnswers, setUserAnswers] = useState({});
@@ -9,6 +10,8 @@ const Test = () => {
     const [currentQuestionId, setCurrentQuestionId] = useState(1);
     const [currentQuestion, setCurrentQuestion] = useState({});
     const [numberOfQuestions, setNumberOfQuestions] = useState(0);
+    const user = useAuth();
+
     const createQIds = (data) => {
         let qIdCount = 0;
         data.data.forEach((question) => {
@@ -44,7 +47,8 @@ const Test = () => {
         }
     };
     useEffect(async () => {
-        let data = await fetchApi('/question');
+        let userTestId = user.user.test_id;
+        let data = await fetchApi(`/question?test_id=${userTestId}`);
         let res = createQIds(data);
         setQuestions(res);
         setNumberOfQuestions(data.data.length);
