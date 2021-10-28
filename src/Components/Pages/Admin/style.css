@@ -6,3 +6,15 @@
     color: #0F0028;
     font-family: 'Space Grotesk', sans-serif;
 }
+
+.adminButton {
+    font-family: 'JetBrains Mono';
+    background-color: #5FFFB4;
+    color: #0F0028;
+    border: 1px solid #0F0028;
+}
+
+.adminButton:hover {
+    background-color: #0F0028;
+    color: #5FFFB4;
+}

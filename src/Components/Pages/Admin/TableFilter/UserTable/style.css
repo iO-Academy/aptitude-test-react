@@ -3,12 +3,13 @@
 }
 
 .pass {
-    background-color: #baffa6;
+    background-color: #baffa6 !important;
 }
 
 .fail {
-    background-color: #ffb8b8;
+    background-color: #e38585 !important;
 }
+
 
 .tableHead {
     color: #0F0028;
