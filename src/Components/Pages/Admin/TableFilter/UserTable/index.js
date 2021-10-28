@@ -47,7 +47,7 @@ const UserTable = ({ users }) => {
                 return user;
             });
             let resultsScore = useJoin([resultsDate, 'id', 'testScore'], [results, 'id', 'score']);
-            let resultsAnswers = useJoin([resultsScore, 'id', 'answers'], [results, 'resultId', 'answers']);
+            let resultsAnswers = useJoin([resultsScore, 'id', 'answers'], [results, 'id', 'answers']);
             setEditedUsers(useJoin([resultsAnswers, 'id', 'timeTaken'], [results, 'id', 'time']));
         }
     }, [results, users]);
