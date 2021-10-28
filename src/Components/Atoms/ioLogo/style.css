@@ -1,6 +1,7 @@
 * {
     box-sizing: border-box;
 }
+
 .cls-1-green {
     fill: #5fffb4;
 }
@@ -8,21 +9,27 @@
 .cls-2-green {
     fill: #0f0028;
 }
+
 .cls-1-black {
     fill: #0f0028;
 }
+
 .cls-2-black {
     fill: #fff;
 }
+
 .cls-1-red {
     fill: #f36;
 }
+
 .cls-2-red {
     fill: #fff;
 }
+
 .cls-1-white {
     fill: #fff;
 }
+
 .cls-2-white {
     fill: #0f0028;
 }
