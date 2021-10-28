@@ -1,13 +1,15 @@
 //Import Modal and Table components from react-bootstrap
 import { Modal } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useJoin from '../../../../Hooks/useJoin';
+import getData from '../../../../Hooks/getData';
 
 // Create an AdminModal component
 const AdminModal = (props) => {
     // Set the component return to give modal content
-    // const [editedUser, setEditedUser] = useState(props.user);
+    const [questions, setQuestions] = useState(null);
+    const [editedAnswers, setEditedAnswers] = useState([]);
     let answersArray = [];
     let mappedAnswerArray = [];
     if (props.user.answers !== '' && typeof props.user.answers !== 'undefined') {
@@ -18,7 +20,35 @@ const AdminModal = (props) => {
             return { ...{ question: answer[0] }, ...answer[1] };
         });
     }
-    console.log(mappedAnswerArray);
+    useEffect(async () => {
+        let tempQuestions = await getData('question');
+        let tempAnswers = await getData('answer');
+        let questionsAnswerKey = useJoin([tempQuestions, 'id', 'answer'], [tempAnswers, 'id', 'answer']);
+        setQuestions(
+            questionsAnswerKey.map((question) => {
+                question.answer = question['option' + question.answer];
+                return question;
+            }),
+        );
+        setQuestions(questionsAnswerKey);
+    }, []);
+    useEffect(() => {
+        if (questions && mappedAnswerArray !== []) {
+            let tempAnswerArray = useJoin([mappedAnswerArray, 'question', 'questionText'], [questions, 'id', 'text']);
+            let optionAnswerArray = tempAnswerArray.map((answer) => {
+                let filteredData2 = questions.filter((question) => {
+                    return question['id'] === answer['question'];
+                });
+                if (filteredData2[0]) {
+                    answer['applicantAnswer'] = filteredData2[0]['option' + answer.answerID];
+                    return answer;
+                }
+                answer['applicantAnswer'] = '';
+                return answer;
+            });
+            setEditedAnswers(useJoin([optionAnswerArray, 'question', 'correctAnswer'], [questions, 'id', 'answer']));
+        }
+    }, [questions]);
     return (
         <Modal size="xl" show={props.show} onHide={props.onHide}>
             {/* Modal header with title */}
@@ -38,12 +68,12 @@ const AdminModal = (props) => {
                     </thead>
                     {/* Map the questions and answers onto the modal table */}
                     <tbody>
-                        {answersArray.map((answer) => {
+                        {editedAnswers.map((answer) => {
                             return (
-                                <tr key={answer[0]}>
-                                    <td>question will go here</td>
-                                    <td>correct answer will go here</td>
-                                    <td>{answer[1].answerID}</td>
+                                <tr key={answer.id}>
+                                    <td>{answer.questionText}</td>
+                                    <td>{answer.correctAnswer}</td>
+                                    <td>{answer.applicantAnswer}</td>
                                 </tr>
                             );
                         })}
