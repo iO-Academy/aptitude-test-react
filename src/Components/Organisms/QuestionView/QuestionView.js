@@ -1,35 +1,41 @@
 import QuestionTracker from '../../Atoms/QuestionTracker/QuestionTracker';
 import QuestionMain from '../../Molecules/QuestionMain/QuestionMain';
 import NavButton from '../../Atoms/NavButton/NavButton';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 
-const QuestionView = (props) => {
+const QuestionView = ({
+    currentQuestionId,
+    userAnswers,
+    changeCurrentId,
+    currentQuestion,
+    modifyQuestionId,
+    updateUserAnswers,
+    numberOfQuestions,
+}) => {
     return (
         <Container>
-            <QuestionTracker currentQuestionId={props.currentQuestionId} numberOfQuestions={props.numberOfQuestions} />
+            <QuestionTracker currentQuestionId={currentQuestionId} numberOfQuestions={numberOfQuestions} />
             <QuestionMain
-                currentQuestion={props.currentQuestion}
-                updateUserAnswers={props.updateUserAnswers}
-                currentQuestionId={props.currentQuestionId}
-                userAnswers={props.userAnswers}
+                currentQuestion={currentQuestion}
+                updateUserAnswers={updateUserAnswers}
+                currentQuestionId={currentQuestionId}
+                userAnswers={userAnswers}
             />
             <Row>
-                {props.currentQuestionId !== 1 && (
+                {currentQuestionId !== 1 && (
                     <NavButton
                         action="previous"
-                        currentQuestionId={props.currentQuestionId}
-                        changeCurrentId={props.changeCurrentId}
-                        numberOfQuestions={props.numberOfQuestions}
-                        modifyQuestionId={props.modifyQuestionId}
+                        currentQuestionId={currentQuestionId}
+                        changeCurrentId={changeCurrentId}
+                        modifyQuestionId={modifyQuestionId}
                     />
                 )}
-                {props.currentQuestionId !== props.numberOfQuestions && (
+                {currentQuestionId !== numberOfQuestions && (
                     <NavButton
                         action="next"
-                        currentQuestionId={props.currentQuestionId}
-                        changeCurrentId={props.changeCurrentId}
-                        numberOfQuestions={props.numberOfQuestions}
-                        modifyQuestionId={props.modifyQuestionId}
+                        currentQuestionId={currentQuestionId}
+                        changeCurrentId={changeCurrentId}
+                        modifyQuestionId={modifyQuestionId}
                     />
                 )}
             </Row>
