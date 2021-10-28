@@ -53,6 +53,24 @@ const Test = () => {
         let answers = await fetchApi(`/answer?test_id=${userTestId}`);
         setTestAnswers(answers.data);
     };
+    useEffect(() => {
+        if (testAnswers.length) {
+            console.log(testAnswers);
+            console.log(calculateScore(userAnswers, testAnswers));
+        }
+    }, [testAnswers]);
+
+    const calculateScore = (userAnswers, testAnswers) => {
+        let score = 0;
+        for (let i = 0; i < testAnswers.length; i++) {
+            if (userAnswers.hasOwnProperty(i + 1)) {
+                if (userAnswers[i + 1] === testAnswers[i].answer) {
+                    score++;
+                }
+            }
+        }
+        return score;
+    };
 
     useEffect(async () => {
         let userTestId = user.user.test_id;
@@ -78,6 +96,8 @@ const Test = () => {
                 changeCurrentId={setCurrentQuestionId}
                 userAnswers={userAnswers}
                 getAnswers={getAnswers}
+                calculateScore={calculateScore}
+                testAnswers={testAnswers}
             />
         </Container>
     );

@@ -1,12 +1,22 @@
 import './navButtonStyles.scss';
 import { Button, Col } from 'react-bootstrap';
-const NavButton = ({ action, changeCurrentId, currentQuestionId, modifyQuestionId, getAnswers }) => {
+const NavButton = ({
+    action,
+    changeCurrentId,
+    currentQuestionId,
+    modifyQuestionId,
+    getAnswers,
+    calculateScore,
+    userAnswers,
+    testAnswers,
+}) => {
     const handleClick = () => {
         if (action === 'next') {
             modifyQuestionId(changeCurrentId(currentQuestionId + 1));
         } else if (action === 'previous') {
             modifyQuestionId(changeCurrentId(currentQuestionId - 1));
         } else if (action === 'finish') {
+            // Need to update userAnswers state for last question before calculateScore is called
             getAnswers();
         }
     };
