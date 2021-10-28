@@ -19,7 +19,6 @@ const NavButton = ({
         } else if (action === 'finish') {
             // Need to update userAnswers state for last question before calculateScore is called
             getAnswers();
-            sendAnswers();
         }
     };
     const createButtonText = (action) => {

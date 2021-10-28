@@ -55,8 +55,8 @@ const Test = ({ finish }) => {
     };
     useEffect(() => {
         if (testAnswers.length) {
-            console.log(testAnswers);
-            console.log(calculateScore(userAnswers, testAnswers));
+            let score = calculateScore(userAnswers, testAnswers);
+            sendAnswers(score);
         }
     }, [testAnswers]);
 
@@ -72,11 +72,11 @@ const Test = ({ finish }) => {
         return score;
     };
 
-    const sendAnswers = async () => {
+    const sendAnswers = async (score) => {
         let answersToSend = {
             uid: user.user.id,
             answers: userAnswers,
-            score: 24,
+            score: score,
             testLength: numberOfQuestions,
             time: '29.55',
         };
@@ -88,7 +88,6 @@ const Test = ({ finish }) => {
 
         if (postTheAnswers.success === true) {
             finish();
-            console.log(postTheAnswers);
         } else {
             finish(true);
         }
