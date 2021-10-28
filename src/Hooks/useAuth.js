@@ -20,7 +20,6 @@ function useProvideAuth() {
     const signin = async (url) => {
         if (url === '') return;
         let response = await fetchApi(`user?email=${url}`);
-        console.log(response);
         if (response.success) {
             if (response.data.canRetake === '1' || response.data.isAdmin === '1') {
                 return setUser(response.data);
