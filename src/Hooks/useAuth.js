@@ -20,8 +20,13 @@ function useProvideAuth() {
     const signin = async (url) => {
         if (url === '') return;
         let response = await fetchApi(`user?email=${url}`);
+        console.log(response);
         if (response.success) {
-            return setUser(response.data);
+            if (response.data.canRetake === '0') {
+                return;
+            } else {
+                return setUser(response.data);
+            }
         }
     };
 
