@@ -9,6 +9,7 @@ const NavButton = ({
     calculateScore,
     userAnswers,
     testAnswers,
+    sendAnswers,
 }) => {
     const handleClick = () => {
         if (action === 'next') {
@@ -18,6 +19,7 @@ const NavButton = ({
         } else if (action === 'finish') {
             // Need to update userAnswers state for last question before calculateScore is called
             getAnswers();
+            sendAnswers();
         }
     };
     const createButtonText = (action) => {

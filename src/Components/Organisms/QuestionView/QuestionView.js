@@ -14,6 +14,7 @@ const QuestionView = ({
     getAnswers,
     calculateScore,
     testAnswers,
+    sendAnswers,
 }) => {
     return (
         <Container>
@@ -48,6 +49,7 @@ const QuestionView = ({
                         calculateScore={calculateScore}
                         userAnswers={userAnswers}
                         testAnswers={testAnswers}
+                        sendAnswers={sendAnswers}
                     />
                 )}
             </Row>

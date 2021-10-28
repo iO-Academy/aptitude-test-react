@@ -72,6 +72,23 @@ const Test = () => {
         return score;
     };
 
+    const sendAnswers = async () => {
+        let answersToSend = {
+            uid: user.user.id,
+            answers: userAnswers,
+            score: 24,
+            testLength: numberOfQuestions,
+            time: '29.55',
+        };
+
+        let postTheAnswers = await fetchApi('answer', {
+            method: 'POST',
+            body: answersToSend,
+        });
+
+        console.log(postTheAnswers);
+    };
+
     useEffect(async () => {
         let userTestId = user.user.test_id;
         let data = await fetchApi(`/question?test_id=${userTestId}`);
@@ -98,6 +115,7 @@ const Test = () => {
                 getAnswers={getAnswers}
                 calculateScore={calculateScore}
                 testAnswers={testAnswers}
+                sendAnswers={sendAnswers}
             />
         </Container>
     );
