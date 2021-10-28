@@ -29,7 +29,7 @@ const TableAccordion = ({ user }) => {
             <Accordion.Item eventKey="0">
                 <Accordion.Header className="accordion">Extra info</Accordion.Header>
                 <Accordion.Body>
-                    <Table>
+                    <Table className="accordionTable">
                         <thead>
                             <tr>
                                 <th>User category</th>
@@ -42,7 +42,7 @@ const TableAccordion = ({ user }) => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr className="accordionBody">
                                 <td>{user.category_name}</td>
                                 <td>{user.testName}</td>
                                 <td>
