@@ -1,5 +1,4 @@
 import jsonToFormData from '../Components/Utilities/formData';
-
 const fetchApi = async (url, options = {}) => {
     if ('method' in options && options.method === 'POST') {
         options.body = jsonToFormData(options.body);

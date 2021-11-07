@@ -4,6 +4,12 @@
     font-family: 'JetBrains Mono';
 }
 
-.accordion-button {
+.accordion-header {
     font-family: 'JetBrains Mono';
+    color: #743DFB;
 }
+
+.accordionBody {
+    border-top: 2px solid #0F0028;
+}
+

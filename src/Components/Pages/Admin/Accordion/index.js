@@ -1,28 +1,65 @@
 import Accordion from 'react-bootstrap/Accordion';
 import Table from 'react-bootstrap/Table';
+import { useEffect, useState } from 'react';
+import AdminModal from '../AdminModal';
 import './style.css';
+import useGetData from '../../../../Hooks/useGetData';
 
-const TableAccordion = (props) => {
+const TableAccordion = ({ user }) => {
+    // Set useState for results, show and questions
+    const [questions, setQuestions] = useState(null);
+    const [show, setShow] = useState(false);
+    const [adminModal, setModal] = useState(null);
+    const handleShow = () => setShow(true);
+    const handleClose = () => setShow(false);
+
+    // On mount async and await fetching results and questions from API
+    useEffect(async () => {
+        setQuestions(await useGetData('question'));
+    }, []);
+    useEffect(() => {
+        questions
+            ? setModal(
+                  <AdminModal show={show} setShow={setShow} onHide={handleClose} questions={questions} user={user} />,
+              )
+            : '';
+    }, [questions, show]);
     return (
         <Accordion>
             <Accordion.Item eventKey="0">
                 <Accordion.Header className="accordion">Extra info</Accordion.Header>
                 <Accordion.Body>
-                    <Table>
+                    <Table className="accordionTable">
                         <thead>
                             <tr>
-                                <th>user category</th>
-                                <th>test allocated</th>
-                                <th>time allowed</th>
-                                <th>timer hidden</th>
+                                <th>User category</th>
+                                <th>Test allocated</th>
+                                <th>Score</th>
+                                <th>Time allowed(m)</th>
+                                <th>Time taken(m)</th>
+                                <th>Timer hidden</th>
+                                <th>Date</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>{props.user.category_name}</td>
-                                <td>{props.user.testName}</td>
-                                <td>{props.user.time}</td>
-                                <td>{props.user.showTimer}</td>
+                            <tr className="accordionBody">
+                                <td>{user.category_name}</td>
+                                <td>{user.testName}</td>
+                                <td>
+                                    {user.testScore === '' && user.testLength === ''
+                                        ? 'N/A'
+                                        : user.testScore + '/' + user.testLength}
+                                </td>
+                                <td>{parseInt(user.time) / 60}</td>
+                                <td>{user.timeTaken}</td>
+                                <td>{user.showTimer === '1' ? 'yes' : 'no'}</td>
+                                <td>{user.testDate}</td>
+                                <td>
+                                    <button className="btn adminButton" onClick={handleShow}>
+                                        See answers
+                                    </button>
+                                    {adminModal}
+                                </td>
                             </tr>
                         </tbody>
                     </Table>
