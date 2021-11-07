@@ -80,7 +80,8 @@ const Admin = () => {
         <div className="adminPage p-3">
             <div className="container">
                 <h1 className="adminh1">Admin page</h1>
-                <NewUserForm tests={tests} categories={categories} onUserAdded={addedUserHandler} />
+                <NewUserForm onUserAdded={addedUserHandler} />
+                {/*<NewUserForm tests={tests} categories={categories} onUserAdded={addedUserHandler} />*/}
                 <Search users={users} onSearchChange={searchChangeHandler} />
                 <TableFilter categories={categories} onFilterChange={filterChangeHandler} />
                 <UserTable users={filteredUsers} />
