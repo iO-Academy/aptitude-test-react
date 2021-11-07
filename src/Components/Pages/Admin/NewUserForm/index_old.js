@@ -96,6 +96,7 @@ const NewUserInput = (props) => {
             feedback.innerHTML = 'User successfully added.';
             feedback.className = 'feedback-div col-lg-10 me-auto alert alert-success';
             reset();
+            props.onUserAdded();
         }
     };
     /**
@@ -107,6 +108,7 @@ const NewUserInput = (props) => {
         formState: { errors },
         reset,
     } = useForm();
+
     /**
      * Handles the submit button action
      */
@@ -120,6 +122,7 @@ const NewUserInput = (props) => {
         user['time'] = time;
         checkEmailAgainstDB(user.email, user);
     };
+
     /**
      * Form output for display on page (including front-end validation (...register) and content for dropdown menus).
      */

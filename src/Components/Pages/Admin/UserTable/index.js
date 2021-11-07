@@ -1,10 +1,10 @@
 import Table from 'react-bootstrap/Table';
-import TableAccordion from '../../Accordion';
+import TableAccordion from '../Accordion';
 import './style.css';
 import React from 'react';
 import { useEffect, useState } from 'react';
-import useGetData from '../../../../../Hooks/useGetData';
-import useJoin from '../../../../../Hooks/useJoin';
+import useGetData from '../../../../Hooks/useGetData';
+import useJoin from '../../../../Hooks/useJoin';
 
 const UserTable = ({ users }) => {
     //initial state of the tests is null until tests is populated

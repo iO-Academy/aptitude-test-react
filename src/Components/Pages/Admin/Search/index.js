@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Fuse from 'fuse.js';
+import './style.css';
 
 const Search = (props) => {
     const [query, setQuery] = useState('');
@@ -22,7 +23,6 @@ const Search = (props) => {
     };
 
     const fuse = new Fuse(props.users, fuseoptions);
-
     const results = fuse.search(query);
     const searchResult = query ? results.map((user) => user.item) : {};
 
@@ -37,25 +37,27 @@ const Search = (props) => {
     };
 
     return (
-        <Form className="d-flex w-100">
-            <Form.Control
-                type="search"
-                value={query}
-                onChange={searchHandler}
-                onReset={resetHandler}
-                placeholder="Search"
-                className="me-2"
-                aria-label="Search"
-            />
-            <Button
-                as="input"
-                type="reset"
-                value="Clear"
-                // variant="outline-primary"
-                className="float-end logoutBtn p-2"
-                onClick={resetHandler}
-            />
-        </Form>
+        <>
+            <h5>Search</h5>
+            <Form className="d-flex mb-3 mt-3">
+                <Form.Control
+                    type="search"
+                    value={query}
+                    onChange={searchHandler}
+                    onReset={resetHandler}
+                    placeholder="Search"
+                    className="me-2"
+                    aria-label="Search"
+                />
+                <Button
+                    as="input"
+                    type="reset"
+                    value="Clear"
+                    className="float-end logoutBtn p-2"
+                    onClick={resetHandler}
+                />
+            </Form>
+        </>
     );
 };
 

@@ -1,57 +1,31 @@
+import React, { useEffect, useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import './style.css';
-import UserTable from './UserTable';
-import { useEffect, useState } from 'react';
 
-const TableFilter = ({ users, categories }) => {
-    const [filteredUsers, setFilteredUsers] = useState(users);
-    const [userTable, setUserTable] = useState('null');
-    const [filterToggleName, setFilterToggleName] = useState('Category');
-    let filteredUsersArray = [];
+const TableFilter = (props) => {
+    const [filterSelected, setFilterSelected] = useState('Category');
 
-    useEffect(() => {
-        filteredUsers ? setUserTable(<UserTable users={filteredUsers} />) : '';
-    }, [filteredUsers]);
+    const catChangeHandler = (eventKey, event) => {
+        setFilterSelected(event.target.textContent);
+        props.onFilterChange(eventKey);
+    };
 
     return (
-        <div>
-            <h5>Filter Results</h5>
-            <Dropdown className="my-3">
+        <>
+            <h5>Filter</h5>
+            <Dropdown className="my-3" onSelect={catChangeHandler}>
                 <Dropdown.Toggle className="btn dropdown-toggle" type="button">
-                    {filterToggleName}
+                    {filterSelected}
                 </Dropdown.Toggle>
                 <Dropdown.Menu className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    {categories.map((category) => {
-                        return (
-                            <Dropdown.Item
-                                key={category.id}
-                                href="#"
-                                onClick={() => {
-                                    setFilterToggleName(category.name);
-                                    users.map((user) => {
-                                        return user.category_name === category.name
-                                            ? filteredUsersArray.push(user)
-                                            : '';
-                                    });
-                                    return setFilteredUsers(filteredUsersArray);
-                                }}
-                            >
-                                {category.name}
-                            </Dropdown.Item>
-                        );
+                    <Dropdown.Item eventKey="all">All</Dropdown.Item>
+                    {props.categories.map((category) => {
+                        // eslint-disable-next-line react/jsx-key
+                        return <Dropdown.Item eventKey={category.id}>{category.name}</Dropdown.Item>;
                     })}
-                    <Dropdown.Item
-                        onClick={() => {
-                            setFilterToggleName('None');
-                            setFilteredUsers(users);
-                        }}
-                    >
-                        None
-                    </Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>
-            {userTable}
-        </div>
+        </>
     );
 };
 
